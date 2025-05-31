@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+  font-family: "IBM Plex Serif";
+  scroll-behavior: smooth;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #AFCECF;
+  padding-top: 20vh;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+  width: 400px;
+  height: fit-content;
+  text-align: center;
+}
+
+h1 {
+  font-size: 50px;
+  font-weight: 400;
+}
+
+button {
+  font-size: 26px; 
+  border-radius: 10px;
+  border: none;
+  height: 50px;
+  width: 250px;
+  margin: 0 auto;
+  cursor: pointer;
+  transition: all .15s;
+  box-shadow: 0 4px 4px #729FA0;
+}
+button:hover { transform: scale(1.05); }
+button:active {
+  box-shadow: none;
+  transform: scale(1.05) translateY(4px);
+}
+
+#dice-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+#die1, #die2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 100px;
+  background-color: white;
+  border-radius: 15px;
+  border: 3px solid black;
+  font-size: 80px;
+}
+
+#die1.spinny, #die2.spinny { animation: spinny 2ms 150; }
+@keyframes spinny {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(.75); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+#die1 span, #die2 span {
+  display: none;
+  font-family: "Montserrat";
+}
+
+#die1.zero, #die2.zero { display: none; }
+
+#dice-container .one span:nth-child(1) { display: inline; }
+#dice-container .two span:nth-child(2) { display: inline; }
+#dice-container .three span:nth-child(3) { display: inline; }
+#dice-container .four span:nth-child(4) { display: inline; }
+#dice-container .five span:nth-child(5) { display: inline; }
+#dice-container .six span:nth-child(6) { display: inline; }
+
+p {
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+
+p a { color: black; }
