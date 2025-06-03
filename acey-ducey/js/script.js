@@ -1,0 +1,1 @@
+let $s1 = "Welcome to Acey Ducey! I'm Cassie. I'll be your dealer today.";

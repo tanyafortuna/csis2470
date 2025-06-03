@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Federo&family=Limelight&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+  font-family: "Federo";
+  scroll-behavior: smooth;
+  color: white;
+  font-size: 25px;
+}
+
+body {
+  display: grid;
+  justify-content: center;
+  align-content: end;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Top section of page */
+.top {
+  background-color: #012112;
+  border: 10px solid #01180E;
+  box-shadow: inset 0 0 10px #01180E;
+}
+#talk-area {
+  display: grid;
+  grid-template-columns: 520px 1fr;
+  justify-content: space-between;
+  width: max(100vw, 1600px);
+  height: 350px;
+  margin: 0 auto;
+  position: relative;
+}
+
+#info {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 0;
+}
+
+h1 {
+  font-size: 60px;
+  font-family: "Limelight";
+  text-align: center;
+  color: white;
+  height: 100px;
+  width: 400px;
+  padding: 13px;
+}
+
+#bank { 
+  text-align: center; 
+  font-size: 32px;
+}
+
+#cassie {
+  height: 350px;
+  position: absolute;
+  top: 40px;
+  right: 75px;
+}
+
+#talk-bubble {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-right: 400px;
+}
+
+#bubble {
+  width: 600px;
+  height: 200px;
+  border-radius: 30px;
+  background-color: white;
+  padding: 30px;
+}
+
+#bubble p {
+  height: 100px;
+  color: black;
+}
+
+#button-div {
+  display: flex;
+  justify-content: end;
+  height: 40px;
+}
+#talk-next {
+  border-radius: 8px;
+  padding: 5px 15px;
+  box-shadow: 0 2px 2px grey;
+  color: black;
+  transition: all .15s;
+}
+#talk-next:active {
+  box-shadow: none;
+  transform: translateY(2px);
+}
+
+#bubble-point {
+  height: 0;
+  width: 0;
+  border-left: 30px solid white;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+
+
+/* Bottom section of page */
+.bottom {
+  background-image: url('../img/green-bg.jpg');
+  background-size: 105vw;
+}
+#play-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1600px;
+  height: calc(100vh - 350px);
+  margin: 0 auto;
+}
+
+#cards {
+  display: grid;
+  grid-template-columns: 250px 250px 250px;
+  grid-template-rows: 350px 350px;
+  row-gap: 25px;
+  justify-content: space-between;
+  width: 950px;
+}
+
+#card1, #card2, #card3 {
+  background: url("../img/back.jpg");
+  background-size: 100% 100%;
+  border-radius: 15px;
+}
+
+#card1 { grid-area: 1 / 1 / 1 / 1; }
+#card2 { grid-area: 1 / 3 / 1 / 3; }
+#card3 { grid-area: 2 / 2 / 2 / 2; }
