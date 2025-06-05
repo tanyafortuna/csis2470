@@ -3,7 +3,7 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="css/style.css">
-  <script src="js/script.js"></script>
+  <script src="js/script.js" defer></script>
   <title>Acey Ducey</title>
 </head>
 <body>
@@ -11,12 +11,34 @@
     <div id="talk-area">
       <div id="info">
         <h1>Acey Ducey</h1>
-        <p id="bank">Your bank: $100</p>
+        <div class="bank">
+          <p class="bank">Your bank: $<span id="bank-amount">100</span></p>
+          <p class="bank">Break $500 to win!</p>
+        </div>
+        <div id="buttons-area">
+          <button class="button dark-bg" onclick="">Help</button>
+          <button class="button dark-bg" onclick="">AI</button>
+          <button class="button dark-bg" onclick="resetBank();">Reset</button>
+          <div id="cheat-mode">
+            <input id="cheat-mode-input" type="checkbox">
+            <label id="cheat-mode-label" for="cheat-mode-input">Cheat mode</label>
+          </div>
+        </div>
       </div>
       <div id="talk-bubble">
         <div id="bubble">
-          <p id="bubble-text"></p>
-          <div id="button-div"><button id="talk-next">OK</button></div>
+          <p id="bubble-text">Welcome to Acey Ducey! I'm Cassie. I'll be your dealer today.</p>
+          <div id="bet-div">
+          </div>
+          <div id="button-div">
+            <div>
+              <input id="bet-amount" type="number" min="0">
+            </div>
+            <div>
+              <button id="place-bet" class="button" onclick="processBet();">Place Bet</button>
+              <button id="talk-next" class="button" onclick="nextPrompt();">OK</button>
+            </div>
+          </div>
         </div>
         <div id="bubble-point"></div>
       </div>
