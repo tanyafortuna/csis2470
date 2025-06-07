@@ -1,3 +1,26 @@
+// preload card images so they aren't slow
+let images = new Array();
+let files = new Array(
+  "img/cards/AC.jpg", "img/cards/AD.jpg", "img/cards/AH.jpg", "img/cards/AS.jpg",
+  "img/cards/2C.jpg", "img/cards/2D.jpg", "img/cards/2H.jpg", "img/cards/2S.jpg",
+  "img/cards/3C.jpg", "img/cards/3D.jpg", "img/cards/3H.jpg", "img/cards/3S.jpg",
+  "img/cards/4C.jpg", "img/cards/4D.jpg", "img/cards/4H.jpg", "img/cards/4S.jpg",
+  "img/cards/5C.jpg", "img/cards/5D.jpg", "img/cards/5H.jpg", "img/cards/5S.jpg",
+  "img/cards/6C.jpg", "img/cards/6D.jpg", "img/cards/6H.jpg", "img/cards/6S.jpg",
+  "img/cards/7C.jpg", "img/cards/7D.jpg", "img/cards/7H.jpg", "img/cards/7S.jpg",
+  "img/cards/8C.jpg", "img/cards/8D.jpg", "img/cards/8H.jpg", "img/cards/8S.jpg",
+  "img/cards/9C.jpg", "img/cards/9D.jpg", "img/cards/9H.jpg", "img/cards/9S.jpg",
+  "img/cards/10C.jpg", "img/cards/10D.jpg", "img/cards/10H.jpg", "img/cards/10S.jpg",
+  "img/cards/JC.jpg", "img/cards/JD.jpg", "img/cards/JH.jpg", "img/cards/JS.jpg",
+  "img/cards/QC.jpg", "img/cards/QD.jpg", "img/cards/QH.jpg", "img/cards/QS.jpg",
+  "img/cards/KC.jpg", "img/cards/KD.jpg", "img/cards/KH.jpg", "img/cards/KS.jpg"
+);
+
+for (let i = 0; i < files.length; i++) {
+  images[i] = new Image();
+  images[i].src = files[i];
+}
+
 // strings
 let mockingStrings = new Array("What's the matter - afraid of a little risk?",
   "No bet? I didn't know we were playing Go Fish.",
