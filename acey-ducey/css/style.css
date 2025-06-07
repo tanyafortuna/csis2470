@@ -139,9 +139,13 @@ div.bank { padding-bottom: 10px; }
   transition: all .15s;
   cursor: pointer;
 }
-.button:active {
+.button:active:enabled {
   box-shadow: none;
   transform: translateY(2px);
+}
+.button:disabled {
+  cursor: not-allowed;
+  box-shadow: none;
 }
 
 .button.dark-bg { box-shadow: 0 2px 2px black; }
