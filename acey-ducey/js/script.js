@@ -72,6 +72,8 @@ let betAmount = document.getElementById("bet-amount");
 let newCardsButton = document.getElementById("new-cards");
 let nextRulesButton = document.getElementById("talk-rules");
 let nextAIButton = document.getElementById("talk-ai");
+let aiButton = document.getElementById("ai-button");
+let helpButton = document.getElementById("help-button");
 let card1 = document.getElementById("card1");
 let card2 = document.getElementById("card2");
 let card3 = document.getElementById("card3");
@@ -79,7 +81,7 @@ let card3 = document.getElementById("card3");
 // variables
 let faceValue1, faceValue2, faceValue3; // used to store face values 
 let bt = ""; // used to store what the user was seeing before the rules
-let nb, bb, ba, na, nc; // used to store what the user was seeing before the rules
+let nb, bb, ba, na, nc, nr; // used to store what the user saw before the rules
 
 // restrict anything but a whole number in the bet amount field
 let allowedKeys = [..."0123456789", "Backspace"];
@@ -127,14 +129,17 @@ function showAI(n) {
 }
 
 function restoreState() {
-  nextRulesButton.style.display = "none";
   bubbleText.textContent = bt;
   okButton.style.display = nb;
   betButton.style.display = bb;
   betAmount.style.display = ba;
   nextAIButton.style.display = na;
+  nextRulesButton.style.display = nr;
   newCardsButton.style.display = nc;
   bt = "";
+
+  helpButton.removeAttribute("disabled");
+  aiButton.removeAttribute("disabled");
 }
 
 function storeState() {
@@ -143,15 +148,22 @@ function storeState() {
   bb = betButton.style.display;
   ba = betAmount.style.display;
   na = nextAIButton.style.display;
+  nr = nextRulesButton.style.display;
   nc = newCardsButton.style.display;
   okButton.style.display = "none";
   betButton.style.display = "none";
   betAmount.style.display = "none";
-  nextAIButton.style.display = "none"
-  newCardsButton.style.display = "none"
+  nextAIButton.style.display = "none";
+  nextRulesButton.style.display = "none";
+  newCardsButton.style.display = "none";
+
+  helpButton.setAttribute("disabled", "");
+  aiButton.setAttribute("disabled", "");
 }
 
 function processBet() {
+  newCardsButton.style.display = "none";
+
   // no bet
   if (betAmount.value == 0) {
     bubbleText.textContent = mockingStrings[Math.floor(Math.random() * 5)];
@@ -309,5 +321,6 @@ function resetGame() {
   nextRulesButton.style.display = "none";
   nextAIButton.style.display = "none";
   newCardsButton.style.display = "none";
+  bt = "";
   hideCards();
 }
