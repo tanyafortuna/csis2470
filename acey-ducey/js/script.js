@@ -322,5 +322,7 @@ function resetGame() {
   nextAIButton.style.display = "none";
   newCardsButton.style.display = "none";
   bt = "";
+  helpButton.removeAttribute("disabled");
+  aiButton.removeAttribute("disabled");
   hideCards();
 }
