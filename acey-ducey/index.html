@@ -16,9 +16,9 @@
           <p class="bank">Break $500 to win!</p>
         </div>
         <div id="buttons-area">
-          <button class="button dark-bg" onclick="">Help</button>
-          <button class="button dark-bg" onclick="">AI</button>
-          <button class="button dark-bg" onclick="resetBank();">Reset</button>
+          <button class="button dark-bg" onclick="showRules(0);">Help</button>
+          <button class="button dark-bg" onclick="showAI(0);">AI</button>
+          <button class="button dark-bg" onclick="resetGame();">Reset</button>
           <div id="cheat-mode">
             <input id="cheat-mode-input" type="checkbox">
             <label id="cheat-mode-label" for="cheat-mode-input">Cheat mode</label>
@@ -35,8 +35,11 @@
               <input id="bet-amount" type="number" min="0">
             </div>
             <div>
+              <button id="talk-ok" class="button" onclick="promptForBet();">OK</button>
+              <button id="new-cards" class="button" onclick="promptForBet();">New Cards</button>
               <button id="place-bet" class="button" onclick="processBet();">Place Bet</button>
-              <button id="talk-next" class="button" onclick="nextPrompt();">OK</button>
+              <button id="talk-rules" class="button">Next</button>
+              <button id="talk-ai" class="button">Next</button>
             </div>
           </div>
         </div>
