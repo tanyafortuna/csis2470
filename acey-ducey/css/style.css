@@ -6,7 +6,6 @@
   box-sizing: border-box;
   user-select: none;
   font-family: "Federo";
-  scroll-behavior: smooth;
   color: white;
   font-size: 25px;
 }
@@ -17,6 +16,7 @@ body {
   align-content: end;
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
 }
 
 
