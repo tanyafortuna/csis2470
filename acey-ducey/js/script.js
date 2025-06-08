@@ -277,11 +277,11 @@ function setPlayerCard() {
 
   do { // check to make sure it's not the same as a previous card
     fv = Math.floor(Math.random() * 13 + 1);
-    fv = setFVforSpecialCards(fv);
     s = setSuit(Math.floor(Math.random() * 4));
   } while ((fv == faceValue1 && s == suit1) || (fv == faceValue2 && s == suit2));
 
   faceValue3 = fv; // store for later comparison
+  fv = setFVforSpecialCards(fv);
 
   card3.style.backgroundImage = "url('img/cards/" + fv + s + ".jpg')";
 
