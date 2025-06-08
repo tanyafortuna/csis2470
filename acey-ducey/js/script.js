@@ -66,6 +66,7 @@ let cassieStrings = new Array(
 let bankAmount = document.getElementById("bank-amount");
 let cheatMode = document.getElementById("cheat-mode-input");
 let bubbleText = document.getElementById("bubble-text");
+let helloButton = document.getElementById("talk-hello");
 let okButton = document.getElementById("talk-ok");
 let betButton = document.getElementById("place-bet");
 let betAmount = document.getElementById("bet-amount");
@@ -77,12 +78,15 @@ let helpButton = document.getElementById("help-button");
 let card1 = document.getElementById("card1");
 let card2 = document.getElementById("card2");
 let card3 = document.getElementById("card3");
+let card1Back = document.getElementById("card1-back");
+let card2Back = document.getElementById("card2-back");
+let card3Back = document.getElementById("card3-back");
 
 // variables
 let faceValue1, faceValue2, faceValue3; // used to store face values 
 let suit1, suit2; // used to store suits 
 let bt = ""; // used to store what the user was seeing before the rules
-let nb, bb, ba, na, nc, nr; // used to store what the user saw before the rules
+let nb, bb, ba, na, nc, nr, hb; // used to store what the user saw before the rules
 
 // restrict anything but a whole number in the bet amount field
 let allowedKeys = [..."0123456789", "Backspace"];
@@ -131,6 +135,7 @@ function showAI(n) {
 
 function restoreState() {
   bubbleText.textContent = bt;
+  helloButton.style.display = hb;
   okButton.style.display = nb;
   betButton.style.display = bb;
   betAmount.style.display = ba;
@@ -145,6 +150,7 @@ function restoreState() {
 
 function storeState() {
   bt = bubbleText.textContent;
+  hb = helloButton.style.display;
   nb = okButton.style.display;
   bb = betButton.style.display;
   ba = betAmount.style.display;
@@ -223,20 +229,46 @@ function checkForGameLoss() {
   }
 }
 
-function promptForBet() {
+function promptForBet(firstTime) {
   hideCards();
   bubbleText.textContent = cassieStrings[1];
   newCardsButton.style.display = "none";
+  helloButton.style.display = "none";
   okButton.style.display = "none";
   betButton.style.display = "inline-block";
   betAmount.style.display = "block";
-  setNewStartingCards();
+  if (firstTime) setNewStartingCards();
+  else setTimeout(() => { setNewStartingCards(); }, 500);
 }
 
 function hideCards() {
-  card1.style.backgroundImage = "url('img/back.jpg')";
-  card2.style.backgroundImage = "url('img/back.jpg')";
-  card3.style.backgroundImage = "url('img/back.jpg')";
+  if (card1.classList.contains("slow-shrunk")) {
+    card1.classList.remove("slow-shrunk");
+    card2.classList.remove("slow-shrunk");
+    card1.classList.add("shrunk");
+    card2.classList.add("shrunk");
+    card1Back.classList.remove("shrunk");
+    card2Back.classList.remove("shrunk");
+    card1Back.classList.add("slow-shrunk");
+    card2Back.classList.add("slow-shrunk");
+  }
+  else if (card1Back.classList.contains("slow-shrunk")) {
+    card1Back.classList.remove("slow-shrunk");
+    card2Back.classList.remove("slow-shrunk");
+    card1Back.classList.add("shrunk");
+    card2Back.classList.add("shrunk");
+    card1.classList.remove("shrunk");
+    card2.classList.remove("shrunk");
+    card1.classList.add("slow-shrunk");
+    card2.classList.add("slow-shrunk");
+  }
+
+  if (card3.classList.contains("slow-shrunk")) {
+    card3.classList.remove("slow-shrunk");
+    card3.classList.add("shrunk");
+    card3Back.classList.remove("shrunk");
+    card3Back.classList.add("slow-shrunk");
+  }
 }
 
 function setPlayerCard() {
@@ -252,6 +284,11 @@ function setPlayerCard() {
   faceValue3 = fv; // store for later comparison
 
   card3.style.backgroundImage = "url('img/cards/" + fv + s + ".jpg')";
+
+  // remove previous animation on card
+  card3Back.classList.remove("slow-shrunk");
+  card3.classList.remove("shrunk");
+  // trigger new animation
   card3Back.classList.toggle("shrunk");
   card3.classList.toggle("slow-shrunk");
 }
@@ -290,6 +327,17 @@ function setNewStartingCards() {
   // set cards in dom
   card1.style.backgroundImage = "url('img/cards/" + fv1 + s1 + ".jpg')";
   card2.style.backgroundImage = "url('img/cards/" + fv2 + s2 + ".jpg')";
+
+  // remove previous animations on cards
+  card1Back.classList.remove("slow-shrunk");
+  card2Back.classList.remove("slow-shrunk");
+  card1.classList.remove("shrunk");
+  card2.classList.remove("shrunk");
+  // trigger new animations
+  card1Back.classList.add("shrunk");
+  card2Back.classList.add("shrunk");
+  card1.classList.add("slow-shrunk");
+  card2.classList.add("slow-shrunk");
 }
 
 function setFVforSpecialCards(fv) {
@@ -324,7 +372,8 @@ function setSuit(s) {
 function resetGame() {
   bankAmount.textContent = "100";
   bubbleText.textContent = cassieStrings[0];
-  okButton.style.display = "block";
+  helloButton.style.display = "block";
+  okButton.style.display = "none";
   betButton.style.display = "none";
   betAmount.style.display = "none";
   nextRulesButton.style.display = "none";

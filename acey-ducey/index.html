@@ -35,6 +35,7 @@
               <input id="bet-amount" type="number" min="0">
             </div>
             <div>
+              <button id="talk-hello" class="button" onclick="promptForBet(true);">Hello!</button>
               <button id="talk-ok" class="button" onclick="promptForBet();">OK</button>
               <button id="new-cards" class="button" onclick="promptForBet();">New Cards</button>
               <button id="place-bet" class="button" onclick="processBet();">Place Bet</button>
@@ -51,8 +52,11 @@
   <section class="bottom">
     <div id="play-area">
       <div id="cards">
+        <div id="card1-back"></div>
         <div id="card1"></div>
+        <div id="card2-back"></div>
         <div id="card2"></div>
+        <div id="card3-back"></div>
         <div id="card3"></div>
       </div>
     </div>
