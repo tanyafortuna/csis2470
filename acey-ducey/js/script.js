@@ -80,6 +80,7 @@ let card3 = document.getElementById("card3");
 
 // variables
 let faceValue1, faceValue2, faceValue3; // used to store face values 
+let suit1, suit2; // used to store suits 
 let bt = ""; // used to store what the user was seeing before the rules
 let nb, bb, ba, na, nc, nr; // used to store what the user saw before the rules
 
@@ -150,6 +151,7 @@ function storeState() {
   na = nextAIButton.style.display;
   nr = nextRulesButton.style.display;
   nc = newCardsButton.style.display;
+  helloButton.style.display = "none";
   okButton.style.display = "none";
   betButton.style.display = "none";
   betAmount.style.display = "none";
@@ -238,13 +240,20 @@ function hideCards() {
 }
 
 function setPlayerCard() {
-  let fv = Math.floor(Math.random() * 13 + 1);
-  faceValue3 = fv; // store for later comparison
-  fv = setFVforSpecialCards(fv);
+  let fv;
+  let s;
 
-  let s = setSuit(Math.floor(Math.random() * 4));
+  do { // check to make sure it's not the same as a previous card
+    fv = Math.floor(Math.random() * 13 + 1);
+    fv = setFVforSpecialCards(fv);
+    s = setSuit(Math.floor(Math.random() * 4));
+  } while ((fv == faceValue1 && s == suit1) || (fv == faceValue2 && s == suit2));
+
+  faceValue3 = fv; // store for later comparison
 
   card3.style.backgroundImage = "url('img/cards/" + fv + s + ".jpg')";
+  card3Back.classList.toggle("shrunk");
+  card3.classList.toggle("slow-shrunk");
 }
 
 function setNewStartingCards() {
