@@ -100,7 +100,7 @@ function getRandomHex() {
 }
 
 function addSafetyEdges() {
-  robotHead.style.borderRadius = "15px";
+  if (headSquare.checked) { robotHead.style.borderRadius = "15px"; }
   robotArms[0].style.borderRadius = "15px";
   robotArms[1].style.borderRadius = "15px";
   robotTorso.style.borderRadius = "15px";
@@ -109,7 +109,7 @@ function addSafetyEdges() {
 }
 
 function removeSafetyEdges() {
-  robotHead.style.borderRadius = "0px";
+  if (headSquare.checked) { robotHead.style.borderRadius = "0px"; }
   robotArms[0].style.borderRadius = "0px";
   robotArms[1].style.borderRadius = "0px";
   robotTorso.style.borderRadius = "0px";
@@ -128,7 +128,8 @@ function removeEvilEyes() {
 }
 
 function makeHeadSquare() {
-  robotHead.style.borderRadius = "0";
+  if (safetyNo.checked) robotHead.style.borderRadius = "0";
+  else robotHead.style.borderRadius = "15px";
   robotEyes[0].style.height = "56px";
   robotEyes[0].style.width = "56px";
   robotEyes[1].style.height = "56px";
