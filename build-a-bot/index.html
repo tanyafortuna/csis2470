@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <script src="js/script.js" defer></script>
+  <title>Build-a-Bot</title>
+</head>
+<body>
+  <main>
+    <h1>Build-a-Bot</h1>
+    <section id="container">
+      <section id="controls-side">
+        <div id="safety-div" class="controls-div">
+          <p>Safety edges?</p>
+          <div>
+            <input type="radio" id="safety-rounded" name="safety-radio" value="rounded">
+            <label for="safety-rounded">Yes</label>
+          </div>
+          <div>
+            <input type="radio" id="safety-sharp" name="safety-radio" value="sharp" checked>
+            <label for="safety-sharp">No</label>
+          </div>
+        </div>
+        <div id="evil-div" class="controls-div">
+          <p>Evil robot?</p>
+          <div>
+            <input type="radio" id="evil-yes" name="evil-radio" value="evil">
+            <label for="evil-yes">Yes</label>
+          </div>
+          <div>
+            <input type="radio" id="evil-no" name="evil-radio" value="good" checked>
+            <label for="evil-no">No</label>
+          </div>
+        </div>
+        <div id="head-div" class="controls-div">
+          <p>Head style?</p>
+          <div>
+            <input type="radio" id="head-square" name="head-radio" value="square" checked>
+            <label for="head-square">Square</label>
+          </div>
+          <div>
+            <input type="radio" id="head-round" name="head-radio" value="round">
+            <label for="head-round">Round</label>
+          </div>
+        </div>
+        <div id="eye-div" class="controls-div">
+          <p>Eye style?</p>
+          <div>
+            <input type="radio" id="eye-square" name="eye-radio" value="square" checked>
+            <label for="eye-square">Square</label>
+          </div>
+          <div>
+            <input type="radio" id="eye-round" name="eye-radio" value="round">
+            <label for="eye-round">Round</label>
+          </div>
+        </div>
+        <div id="eye-color-div" class="color-controls-div">
+          <label for="eye-color">Eye color?</label>
+          <input type="color" id="eye-color" name="eye-color" value="#FFFFFF">
+        </div>
+        <div id="body-color-div" class="color-controls-div">
+          <label for="body-color">Body color?</label>
+          <input type="color" id="body-color" name="body-color" value="#C0C0C0">
+        </div>
+        <div class="buttons-div">
+          <button id="random-button" class="button">Randomize</button>
+          <button id="reset-button" class="button">Reset</button>
+        </div>
+      </section>
+      <section id="robot-side">
+        <div class="head">
+          <div class="eye"><div class="eyeball"></div></div>
+          <div class="eye"><div class="eyeball"></div></div>
+          <div class="mouth"></div>
+        </div>
+        <div class="body-row">
+          <div class="arm"></div>
+          <div class="torso"></div>
+          <div class="arm"></div>
+        </div>
+        <div class="leg-row">
+          <div class="leg"></div>
+          <div class="leg"></div>
+        </div>
+      </section>
+    </section>
+  </main>
+  <section class="not-for-mobile">
+    <p>This site isn't optimized for mobile devices or browsers at low resolutions. Please visit using a device or browser that is at least 1366px by 768px.</p>
+  </section>
+</body>
+</html>
