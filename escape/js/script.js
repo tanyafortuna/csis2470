@@ -11,6 +11,7 @@ function reset() {
   againButton.style.display = "none";
   rulesP.style.display = "none";
   rulesButton.style.display = "none";
+  document.querySelector("h1").textContent = "I gotta get out!";
   window.addEventListener('keydown', operateRobot);
 }
 
