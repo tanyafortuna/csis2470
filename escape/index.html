@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <script src="js/script.js" defer></script>
+  <title>Robot Runaway</title>
+</head>
+<body>
+  <main>
+    <h1>I gotta get out!</h1>
+    <div class="helper">
+      <button id="again-button" onclick="reset();">Play again</button>
+      <p id="rules-p">Please help me escape by using the arrow keys on your keyboard. If you can sneak me through one of the holes in the walls, I will be free!</p>
+      <button id="rules-button" onclick="reset();">Got it</button>
+    </div>
+    <section id="cage">
+      <div></div>
+      <div data-loc="11" class="cage-div top left"></div>
+      <div data-loc="12" class="cage-div top"></div>
+      <div data-loc="13" class="cage-div"></div>
+      <div data-loc="14" class="cage-div top"></div>
+      <div data-loc="15" class="cage-div top right"></div>
+      <div></div>
+    
+      
+      <div></div>
+      <div data-loc="21" class="cage-div left"></div>
+      <div data-loc="22" class="cage-div"></div>
+      <div data-loc="23" class="cage-div"></div>
+      <div data-loc="24" class="cage-div"></div>
+      <div data-loc="25" class="cage-div right"></div>
+      <div></div>
+      
+      <div></div>
+      <div data-loc="31" class="cage-div"></div>
+      <div data-loc="32" class="cage-div"></div>
+      <div data-loc="33" class="cage-div" id="home">
+        <img src="img/robot.png" id="robot">
+      </div>
+      <div data-loc="34" class="cage-div"></div>
+      <div data-loc="35" class="cage-div"></div>
+      <div></div>
+      
+      <div></div>
+      <div data-loc="41" class="cage-div left"></div>
+      <div data-loc="42" class="cage-div"></div>
+      <div data-loc="43" class="cage-div"></div>
+      <div data-loc="44" class="cage-div"></div>
+      <div data-loc="45" class="cage-div right"></div>
+      <div></div>
+      
+      <div></div>
+      <div data-loc="51" class="cage-div bottom left"></div>
+      <div data-loc="52" class="cage-div bottom"></div>
+      <div data-loc="53" class="cage-div"></div>
+      <div data-loc="54" class="cage-div bottom"></div>
+      <div data-loc="55" class="cage-div bottom right"></div>
+      <div></div>
+      
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </section>
+  </main>
+  <section class="not-for-mobile">
+    <p>This site isn't optimized for mobile devices or browsers at low resolutions. Please visit using a device or browser that is at least 900px by 800px.</p>
+  </section>
+</body>
+</html>

@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+  font-family: "Orbitron";
+  font-size: 25px;
+  color: #343E47;
+}
+
+body {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #70ad47;
+}
+
+main { text-align: center; }
+
+h1 {
+  font-size: 60px;
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.helper { 
+  height: 225px; 
+  width: 520px;
+  margin: 0 auto;
+}
+
+button {
+  padding: 5px 15px;
+  border-radius: 10px;
+  border-color: #343E47;
+  margin: 20px auto;
+  cursor: pointer;
+  box-shadow: 0 3px 3px #343E47;
+  transition: all .15s;
+}
+button:active {
+  box-shadow: none;
+  transform: translateY(3px);
+}
+#again-button { display: none; }
+
+#cage {
+  display: grid;
+  grid-template-columns: 150px repeat(5, 120px) 150px;
+  grid-template-rows:  repeat(5, 70px) 130px;
+}
+
+.cage-div { 
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  background-color: white; 
+}
+
+.cage-div.top { border-top: 5px solid #343E47; }
+.cage-div.right { border-right: 5px solid #343E47; }
+.cage-div.bottom { border-bottom: 5px solid #343E47; }
+.cage-div.left { border-left: 5px solid #343E47; }
+
+#home { position: relative; }
+#cage img { 
+  height: 70px; 
+  padding: 0 25px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotate(0turn) scale(1);
+  transition: top 0.2s linear, left 0.25s linear;
+}
+
+#cage img.winner {
+  animation: winner 0.5s linear;
+  transform: rotate(1turn) scale(2);
+}
+
+@keyframes winner {
+  from { transform: rotate(0turn) scale(1); }
+  to { transform: rotate(1turn) scale(2); }
+}
+
+
+/* Responsiveness */
+.not-for-mobile { 
+  height: 100vh;
+  width: 100vw;
+  display: none; 
+  justify-content: center;
+  align-content: center;
+}
+.not-for-mobile p {
+  margin: 10vw;
+}
+
+@media (max-width: 900px) or (max-height: 800px) {
+  main { display: none; }
+  section.not-for-mobile { display: flex; }
+}
