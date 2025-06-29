@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <script src="js/script.js" defer></script>
+  <title>Robot Repair</title>
+</head>
+<body>
+  <h1>I'm in pieces!</h1>
+  <div class="helper">
+    <p id="rules-p">Please reassemble me! Drag and drop my body back together!</p>
+    <p id="time-p">Do you want to try it with a time limit or without?</p>
+    <div id="time-buttons">
+      <button id="infinity-button" onclick="showPieces();">No limit</button>
+      <button id="ten-button" onclick="showPieces(10);">10 seconds</button>
+      <button id="five-button" onclick="showPieces(5);">5 seconds</button>
+    </div>
+  </div>
+  <main>
+    <section id="junkyard" class="robot-section">
+      <h2>JUNKYARD</h2>
+      <div id="junkyard1" class="parts"></div>
+      <div id="junkyard2" class="parts"></div>
+      <div id="junkyard3" class="parts"></div>
+      <div id="junkyard4" class="parts"></div>
+      <div id="junkyard5" class="parts"></div>
+      <div id="junkyard6" class="parts"></div>
+      <p id="success-p">Wow, that sure feels better. Thank you! Everything is right where it belongs.</p>
+    </section>
+
+    <section id="assembly" class="robot-section">
+      <h2>ASSEMBLY</h2>
+      <div>
+        <div class="robot-arm targets" data-part="left-arm">ARM</div>
+      </div>
+      <div>
+        <div class="robot-head targets" data-part="head">HEAD</div>
+        <div class="robot-body targets" data-part="body">BODY</div>
+        <div class="robot-wheel targets" data-part="wheel">WHEEL</div>
+      </div>
+      <div>
+        <div class="robot-arm targets" data-part="right-arm">ARM</div>
+      </div>
+    </section>
+  </main>
+
+  <section class="not-for-mobile">
+    <p>This site isn't optimized for mobile devices or browsers at low resolutions. Please visit using a device or browser that is at least 900px by 800px.</p>
+  </section>
+</body>
+</html>

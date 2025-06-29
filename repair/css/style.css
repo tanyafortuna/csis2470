@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+  font-family: "Roboto";
+  font-size: 23px;
+  color: #343E47;
+}
+
+body {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #70ad47;
+}
+
+main { 
+  display: flex;
+  grid-template-columns: 1fr 1fr;
+  gap: 150px; 
+}
+
+h1 {
+  font-size: 60px;
+  text-align: center;
+  margin-bottom: 14px;
+}
+h2 {
+  font-size: 36px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.helper { 
+  height: 200px; 
+  width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  gap: 20px;
+}
+
+button {
+  padding: 5px 15px;
+  border-radius: 10px;
+  border-color: #343E47;
+  margin: 0 10px;
+  cursor: pointer;
+  box-shadow: 0 3px 3px #343E47;
+  transition: all .15s;
+}
+button:active {
+  box-shadow: none;
+  transform: translateY(3px);
+}
+
+.robot-section {
+  width: 350px; 
+  height: 500px;
+  padding: 25px;
+  background-color: white;
+}
+
+/* Junkyard area */
+#junkyard {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: max-content 1fr 1fr 1fr;
+}
+
+#junkyard h2 { 
+  grid-column: 1 / span 2; 
+  padding-bottom: 31px;
+}
+
+.parts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+img[data-part="body"] {
+  height: 110px;
+  width: 110px;
+}
+img[data-part="wheel"] {
+  height: 20px;
+  width: 40px;
+}
+img[data-part="head"] {
+  height: 60px;
+  width: 110px;
+}
+img[data-part="left-arm"], 
+img[data-part="right-arm"] {
+  height: 110px;
+  width: 60px;
+}
+
+#success-p {
+  display: none;
+  grid-area: 2 / 1 / span 3 / span 2;
+  padding: 100px 27px 0 27px;
+  text-align: center;
+  height: 100%;
+}
+
+/* Assembly area */
+#assembly {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: max-content 1fr;
+  justify-content: center;
+  column-gap: 20px;
+  row-gap: 70px;
+  transition: all 1s linear;
+}
+
+#assembly h2 { grid-column: 1 / span 3; }
+#assembly div { font-size: 12px; }
+
+.targets {
+  border: 2px dashed #343E47;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: content-box;
+  padding: 5px;
+  transition: margin 1s linear, padding 1s linear;
+}
+.targets.hover {
+  background-color: silver;
+}
+
+.robot-arm {
+  height: 110px;
+  width: 60px;
+  margin-top: 50px;
+}
+.robot-head {
+  height: 60px;
+  width: 110px;
+}
+.robot-body {
+  height: 110px;
+  width: 110px;
+  margin-top: 25px;
+}
+.robot-wheel {
+  height: 20px;
+  width: 40px;
+  margin: 25px auto 0 auto;
+}
+
+
+/* Animations */
+.jiggle {
+  animation: jiggle 1s ease-in-out;
+}
+
+@keyframes jiggle {
+  0%   { transform: rotate(0deg) translateX(0); }
+  5%   { transform: rotate(8deg) translateX(-3px); }
+  10%  { transform: rotate(-8deg) translateX(3px); }
+  15%  { transform: rotate(6deg) translateX(-2px); }
+  20%  { transform: rotate(-6deg) translateX(2px); }
+  30%  { transform: rotate(4deg) translateX(-1px); }
+  40%  { transform: rotate(-4deg) translateX(1px); }
+  50%  { transform: rotate(2deg) translateX(-1px); }
+  60%  { transform: rotate(-2deg) translateX(1px); }
+  70%  { transform: rotate(1deg) translateX(0); }
+  80%  { transform: rotate(-1deg) translateX(0); }
+  90%  { transform: rotate(0.5deg) translateX(0); }
+  100% { transform: rotate(0deg) translateX(0); }
+}
+
+
+
+
+
+
+/* Responsiveness */
+.not-for-mobile { 
+  height: 100vh;
+  width: 100vw;
+  display: none; 
+  justify-content: center;
+  align-content: center;
+}
+.not-for-mobile p {
+  margin: 10vw;
+}
+
+@media (max-width: 900px) or (max-height: 800px) {
+  main { display: none; }
+  section.not-for-mobile { display: flex; }
+}
