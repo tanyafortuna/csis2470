@@ -86,6 +86,8 @@ button:active {
   align-items: center;
 }
 
+.parts img { cursor: pointer; }
+
 img[data-part="body"] {
   height: 110px;
   width: 110px;
