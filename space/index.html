@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <script src="js/script.js" defer></script>
+  <title>Making Contact</title>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Trip Planner</h1>
+      <div class="helper">
+        <p>Preparations are underway for your journey.</p>
+        <p>We must record what your planet, ship, and robot will be called. Your name is also required for the registry.</p>
+        <!-- <p>Don't forget to pack extra underwear!</p> -->
+      </div>
+    </header>
+    <section class="trip-planner">
+      <form class="trip-form" action="javascript:void()">
+        <div class="input-container">
+          <div class="form-item">
+            <label for="fname-input">Your first name?</label>
+            <input type="text" id="fname-input" name="fname-input">
+          </div>
+          <div id="fname-msg" class="msg">
+            <p class="waiting">Awaiting input...</p>
+            <p class="error"></p>    
+            <p class="accepted">Accepted</p>
+          </div>
+        </div>
+        <div class="input-container">
+          <div class="form-item">
+            <label for="lname-input">Your last name?</label>
+            <input type="text" id="lname-input" name="lname-input">
+          </div>
+          <div id="lname-msg" class="msg">
+            <p class="waiting">Awaiting input...</p>
+            <p class="error"></p>    
+            <p class="accepted">Accepted</p>
+          </div>
+        </div>
+        <div class="input-container">
+          <div class="form-item">
+            <label for="planet-input">Name of your planet?</label>
+            <input type="text" id="planet-input" name="planet-input">
+          </div>
+          <div id="planet-msg" class="msg">
+            <p class="waiting">Awaiting input...</p>
+            <p class="error"></p>    
+            <p class="accepted">Accepted</p>
+          </div>
+        </div>
+        <div class="input-container">
+          <div class="form-item">
+            <label for="ship-input">Name of your ship?</label>
+            <input type="text" id="ship-input" name="ship-input">
+          </div>
+          <div id="ship-msg" class="msg">
+            <p class="waiting">Awaiting input...</p>
+            <p class="error"></p>    
+            <p class="accepted">Accepted</p>
+          </div>
+        </div>
+        <div class="input-container">
+          <div class="form-item">
+            <label for="robot-input">Name of your robot?</label>
+            <input type="text" id="robot-input" name="robo-input">
+          </div>
+          <div id="robot-msg" class="msg">
+            <p class="waiting">Awaiting input...</p>
+            <p class="error"></p>    
+            <p class="accepted">Accepted</p>
+          </div>
+        </div>
+
+        <input id="submit" type="submit" value="Preparing for launch..." disabled>
+      </form>
+    </section>
+  </main>
+
+  <section class="not-for-mobile">
+    <p>This site isn't optimized for mobile devices or browsers at low resolutions. Please visit using a device or browser that is at least 1000px by 900px.</p>
+  </section>
+</body>
+</html>
