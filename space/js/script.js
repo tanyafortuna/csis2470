@@ -28,6 +28,7 @@ let acceptedMsgs = [
   document.querySelector("#ship-msg p.accepted"),
   document.querySelector("#robot-msg p.accepted")];
 
+let helperDiv = document.querySelector(".helper");
 let submitButton = document.getElementById("submit");
 let tripSection = document.querySelector(".trip-planner");
 
@@ -35,7 +36,7 @@ let tripSection = document.querySelector(".trip-planner");
 for (let i = 0; i < 5; i++) {
   inputFields[i].addEventListener("input", fieldChecker);
 }
-submitButton.addEventListener("submit", submitForm);
+submitButton.addEventListener("click", submitForm);
 
 // Regex 
 let nameRegex1 = /^[a-z]{5,}$/i;
@@ -113,7 +114,7 @@ function fieldChecker(e) {
   }
 
   // Change button if the form is complete
-  if (isFormComplete()) unlockForm()
+  if (isFormComplete()) unlockForm();
   else lockForm();
 }
 
@@ -127,24 +128,28 @@ function isFormComplete() {
 }
 
 function unlockForm() {
-  submitButton.attributes.disabled = false;
+  submitButton.removeAttribute("disabled");
   submitButton.classList.add("jiggle");
-  submitButton.value = "Ready for blastoff!"
+  submitButton.value = "Ready for blastoff!";
 }
 
 function lockForm() {
-  submitButton.attributes.disabled = true;
+  submitButton.setAttribute("disabled", "");
   submitButton.classList.remove("jiggle");
   submitButton.value = "Preparing for launch...";
 }
 
 function submitForm() {
-  console.log("in the submit function");
+  tripSection.style.display = "none";
 
-  let inputValues;
-  for (let i = 0; i < 5; i++) {
-    inputValues[i] = inputFields[i].value;
-  }
+  confirmationString = "<p>Buckle up! It's going to be a bumpy ride!</p>";
+  confirmationString += "<p>This is a one-way journey, so I hope you packed extra underwear.</p>";
+  confirmationString += "<p>What's that? You didn't know you weren't coming back? Huh. I'm sure we had that in the pamphlet somewhere.</p>";
+  confirmationString += "<p>Anyway, we have you down as " + inputFields[0].value + " " + inputFields[1].value + ". If that's not your name, well, it is now.</p>";
+  confirmationString += "<p>You're headed to a planet called " + inputFields[2].value + ". I think you could have been more creative with the name, but that's just me. You're the one who has to write that on all your mail from now on.</p>";
+  confirmationString += "<p>You're riding on a ship you named " + inputFields[3].value + ". " + inputFields[3].value + ", really? Alright, well, at least your ship is leaving and I won't have to say that name again.</p>";
+  confirmationString += "<p>You'll be taking a trusty robot with you to operate the ship since you conveniently slept through all those trainings. Its name is " + inputFields[4].value + ". If you could just leave it alone that would be best.</p>";
+  confirmationString += "<p>Bon voyage!</p>";
 
-  tripSection.innerHTML = "";
+  helperDiv.innerHTML = confirmationString;
 }
