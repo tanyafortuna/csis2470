@@ -46,6 +46,7 @@ let robotRegex2 = /^[a-z][a-z]-[0-9]$/i;
 let robotRegex3 = /^[a-z]-[0-9][a-z][a-z]$/i;
 let shipRegex1 = /^[a-z]{4,} [i]?[vx]?$/i;
 let shipRegex2 = /^[a-z]{4,} [v]?[i]{0,3}$/i;
+let shipRegex3 = /^[a-z]{4,} [i]{1,3}$/i;
 
 // Error responses
 let errorResponses = [
@@ -82,7 +83,7 @@ function fieldChecker(e) {
       valid = valid && !badPlanets.includes(val.toLowerCase());
       break;
     case 3:
-      valid = shipRegex1.test(val) || shipRegex2.test(val);
+      valid = shipRegex1.test(val) || shipRegex2.test(val) || shipRegex3.test(val);
       valid = valid && !badShips.includes(val.toLowerCase());
       break;
     case 4:
