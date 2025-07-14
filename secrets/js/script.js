@@ -1,5 +1,6 @@
 let currPage = window.location.href;
 currPage = currPage.substring(currPage.lastIndexOf("/") + 1);
+if (currPage == "") currPage = "index.html";
 
 // Regex
 let lettersRegex = /^[a-z]*$/i;
