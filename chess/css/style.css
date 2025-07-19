@@ -7,6 +7,7 @@
   user-select: none;
   font-family: "Nanum Gothic Coding";
   font-size: 22px;
+  color: white;
 }
 
 body {
@@ -25,11 +26,21 @@ main {
   row-gap: 35px;
 }
 
+#table {
+  width: 700px;
+  height: 700px;
+  background-image: url("../img/bg4.jpg");
+  background-size: cover;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Chessboard */
 #chessboard {
   width: 600px;
   height: 600px;
-  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   transform: rotate(0deg);
@@ -41,7 +52,6 @@ main {
   height: 60px;
   width: 60px;
   display: flex;
-  padding: 5px;
   border-radius: 1px;
 }
 
@@ -51,16 +61,7 @@ div.border {
   align-items: center;
   border-radius: 0px;
 }
-div.border.top { 
-  border-top: 1px solid black; 
-  transform: rotate(180deg);
-}
-div.border.right { 
-  transform: rotate(180deg);
-  border-right: 1px solid black; 
-}
-div.border.left { border-right: 1px solid black; }
-div.border.bottom { border-top: 1px solid black; }
+div.border.top, div.border.right { transform: rotate(180deg); }
 
 /* Board bg colors */
 div.light { background-color: white; }
@@ -89,6 +90,7 @@ button {
   border-radius: 20px;
   margin: 15px auto 0 auto;
   cursor: pointer;
+  color: black;
   background-color: white;
   box-shadow: 0 3px 3px slategrey;
   transition: all .15s;
@@ -103,16 +105,6 @@ button:disabled {
 }
 
 
-
-
-
-
-
-
-
-
-
-
 /* Responsiveness */
 .not-for-mobile { 
   height: 100vh;
@@ -125,7 +117,7 @@ button:disabled {
   margin: 10vw;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 700px) {
   main { display: none; }
   section.not-for-mobile { display: flex; }
 }
