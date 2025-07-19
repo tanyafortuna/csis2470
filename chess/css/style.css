@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+  font-family: "Nanum Gothic Coding";
+  font-size: 22px;
+}
+
+body {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-image: url("../img/bg1.jpg");
+  background-size: cover;
+}
+
+main {
+  display: grid;
+  row-gap: 35px;
+}
+
+/* Chessboard */
+#chessboard {
+  width: 600px;
+  height: 600px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  transform: rotate(0deg);
+  transition: transform 2s linear;
+}
+#chessboard.rotate { transform: rotate(180deg); }
+
+#chessboard div {
+  height: 60px;
+  width: 60px;
+  display: flex;
+  padding: 5px;
+  border-radius: 1px;
+}
+
+/* Border CSS */
+div.border { 
+  justify-content: center;
+  align-items: center;
+  border-radius: 0px;
+}
+div.border.top { 
+  border-top: 1px solid black; 
+  transform: rotate(180deg);
+}
+div.border.right { 
+  transform: rotate(180deg);
+  border-right: 1px solid black; 
+}
+div.border.left { border-right: 1px solid black; }
+div.border.bottom { border-top: 1px solid black; }
+
+/* Board bg colors */
+div.light { background-color: white; }
+div.dark { background-color: #255880; }
+
+div.light.browns { background-color: #f1dfd0; }
+div.dark.browns { background-color: #936946; }
+
+div.light.greens { background-color: #d3dcd0; }
+div.dark.greens { background-color: #1b390e; }
+
+div.light.pinks { background-color: #f0dfe7; }
+div.dark.pinks { background-color: #b86088; }
+
+/* Buttons */
+#buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 25px;
+}
+
+button {
+  width: 200px;
+  display: block;
+  padding: 7px 30px;
+  border-radius: 20px;
+  margin: 15px auto 0 auto;
+  cursor: pointer;
+  background-color: white;
+  box-shadow: 0 3px 3px slategrey;
+  transition: all .15s;
+}
+button:active:enabled {
+  box-shadow: none;
+  transform: translateY(3px);
+}
+button:disabled { 
+  cursor: not-allowed; 
+  box-shadow: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Responsiveness */
+.not-for-mobile { 
+  height: 100vh;
+  width: 100vw;
+  display: none; 
+  justify-content: center;
+  align-content: center;
+}
+.not-for-mobile p {
+  margin: 10vw;
+}
+
+@media (max-width: 500px) {
+  main { display: none; }
+  section.not-for-mobile { display: flex; }
+}
