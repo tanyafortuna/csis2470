@@ -86,15 +86,6 @@ class Piece {
     this.image = i;
   }
 
-  toString() {
-    let str = "Piece: " + this.name;
-    str += " is " + this.color;
-    str += " and at position " + this.position;
-    str += ", and it uses image " + this.image + ".";
-
-    return str;
-  }
-
   // Getters
   get name() { return this.#name; }
   get color() { return this.#color; }
@@ -157,11 +148,10 @@ function setBoard() {
     new Piece("DARK PAWN G2", "dark", "G2", "pawn-b.png"),
     new Piece("DARK PAWN H2", "dark", "H2", "pawn-b.png")
   ];
+  console.log(pieces);
 
   let imgCode;
   for (let piece of pieces) {
-    console.log(piece.toString());
-
     imgCode = "<img src='img/" + piece.image + "'";
     if (piece.color == "dark") imgCode += " class='rotate";
     imgCode += "'> ";
