@@ -23,12 +23,18 @@ body {
 
 main {
   display: grid;
-  row-gap: 35px;
+  row-gap: 25px;
+}
+
+h1 {
+  color: black;
+  font-size: 36px;
+  margin: 0 auto;
 }
 
 #table {
-  width: 700px;
-  height: 700px;
+  width: 675px;
+  height: 675px;
   background-image: url("../img/bg4.jpg");
   background-size: cover;
   border-radius: 15px;
@@ -91,7 +97,7 @@ button {
   display: block;
   padding: 7px 30px;
   border-radius: 20px;
-  margin: 15px auto 0 auto;
+  margin: 0 auto 0 auto;
   cursor: pointer;
   color: black;
   background-color: white;
@@ -121,7 +127,7 @@ button:disabled {
   margin: 10vw;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 675px) or (max-height: 800px) {
   main { display: none; }
   section.not-for-mobile { display: flex; }
 }
