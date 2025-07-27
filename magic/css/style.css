@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+  font-family: "Yusei Magic";
+  font-size: 22px;
+}
+
+body {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-image: url("../img/bg5.jpg");
+  background-size: cover;
+}
+
+main {
+  text-align: center;
+  width: 1455px;
+  position: relative;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 60px;
+  margin-bottom: 125px;
+}
+
+#cards {
+  width: 500px;
+  height: 300px;
+  margin: 45px auto;
+}
+
+.card {
+  height: 250px;
+  width: 178px;
+  position: absolute;
+  background-image: url("../img/back.png");
+  background-size: cover;
+  transform: translateY(0);
+  transition: transform 0.3s;
+}
+
+.card.hoverable:hover {
+  transform: translateY(-75px);
+  cursor: pointer;
+}
+
+.card.clicked {
+  transform: translateY(-75px);
+}
+.card.clicked:hover {
+  cursor: pointer;
+}
+
+
+
+
+/* Buttons */
+#buttons {
+  width: fit-content;
+  display: grid;
+  grid-template-columns: max-content max-content;
+  column-gap: 25px;
+  margin: 0 auto;
+}
+
+button {
+  width: 225px;
+  display: block;
+  padding: 5px 10px;
+  border-radius: 20px;
+  margin: 0 auto 0 auto;
+  cursor: pointer;
+  color: black;
+  background-color: white;
+  box-shadow: 0 2px 5px black;
+  transition: all .15s;
+}
+button:active:enabled {
+  box-shadow: none;
+  transform: translateY(3px);
+}
+button:disabled { 
+  cursor: not-allowed; 
+  box-shadow: none;
+  background-color: silver;
+}
+
+
+
+/* Responsiveness */
+.not-for-mobile { 
+  height: 100vh;
+  width: 100vw;
+  display: none; 
+  justify-content: center;
+  align-content: center;
+}
+.not-for-mobile p {
+  margin: 10vw;
+}
+
+@media (max-width: 1455px) or (max-height: 600px) {
+  main { display: none; }
+  section.not-for-mobile { display: flex; }
+}
