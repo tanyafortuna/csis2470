@@ -67,8 +67,8 @@ h1 {
 #buttons {
   width: fit-content;
   display: grid;
-  grid-template-columns: max-content max-content;
-  column-gap: 25px;
+  grid-template-columns: repeat(3, max-content);
+  column-gap: 35px;
   margin: 0 auto;
 }
 

@@ -9,6 +9,7 @@ let deckID = getDeckID();
 let cardsContainerDiv = document.getElementById("cards");
 let showButton = document.getElementById("show-cards");
 let shuffleButton = document.getElementById("shuffle-cards");
+let newButton = document.getElementById("new-cards");
 
 
 // Put card divs on the page
@@ -110,6 +111,30 @@ function shuffleAndShowCards() {
   });
 }
 
+function newCards() {
+  showButton.setAttribute("disabled", true);
+  shuffleButton.setAttribute("disabled", true);
+  newButton.setAttribute("disabled", true);
+  for (card of cardDivs) {
+    card.classList.remove("clicked");
+    card.classList.add("hoverable");
+    card.addEventListener("click", singleClick);
+    card.removeEventListener("dblclick", doubleClick);
+    setBGImage(card, "img/back.png");
+  }
+
+  let x = new XMLHttpRequest();
+  x.open('GET', `https://www.deckofcardsapi.com/api/deck/${deckID}/shuffle/`);
+  x.send();
+  x.addEventListener('readystatechange', () => {
+    if (x.readyState === 4 && x.status === 200) {
+      showButton.removeAttribute("disabled");
+      newButton.removeAttribute("disabled");
+    }
+  });
+}
+
+// Other functions
 function setBGImage(el, img) {
   el.style.backgroundImage = `url("${img}")`;
 }
