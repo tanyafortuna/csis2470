@@ -6,14 +6,8 @@
   user-select: none;
 }
 
-/* body {
-  display: grid;
-  justify-content: center;
-  align-content: center;
-  width: 100vw;
-  height: 100vh;
-} */
-
 canvas {
   background-color: black;
 }
+
+img { display: none; }

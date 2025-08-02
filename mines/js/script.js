@@ -1,111 +1,124 @@
 // Helper variables
 let space, pencil;
-let stars = new Array(), mines = new Array(), homebase, ship;
+let stars = new Array(), mines = new Array(), homebase, ship, shipStart;
 let overlapped;
+let won = false, lost = false;
 let starColors = ["plum", "lightblue", "palegoldenrod", "lightsalmon", "palegreen"];
 let mineColors = ["#6D6968", "grey"];
 
 // Home base and mines
 class Rectangle {
-  constructor(p, w, h, c, ship = false) {
+  constructor(p, w, h, c) {
     this.pencil = p;
     this.w = w;
     this.h = h;
     this.c = c;
-    this.ship = ship
-    if (this.ship) {
-      this.x = space.width / 2;
-      this.y = space.height - this.h;
-    }
-    else {
-      this.x = Math.floor(Math.random() * (space.width - this.w));
-      this.y = Math.floor(Math.random() * (space.height - this.h));
-    }
+    this.x = Math.floor(Math.random() * (space.width - this.w));
+    this.y = Math.floor(Math.random() * (space.height - this.h));
   }
 
   show() {
     this.pencil.beginPath();
-
     this.pencil.fillStyle = this.c;
     this.pencil.rect(this.x, this.y, this.w, this.h);
     this.pencil.fill();
-
     this.pencil.closePath();
   };
 }
 
 // Stars
 class Circle {
-  constructor(x, y, r, p) {
+  constructor(p, x, y, r, c) {
+    this.pencil = p;
     this.x = x;
     this.y = y;
     this.r = r;
-    this.pencil = p;
+    this.c = c;
   }
 
   show() {
     this.pencil.beginPath();
-
-    let tempc = Math.floor(starColors.length * Math.random());
-    this.pencil.fillStyle = starColors[tempc];
+    this.pencil.fillStyle = this.c;
     this.pencil.arc(this.x, this.y, this.r, 0, Math.PI * 2);
     this.pencil.fill();
-
     this.pencil.closePath();
-  };
-
-  // todo not really needed for this
-  move() {
-    this.x += 10;
-    this.y += 5;
   };
 }
 
-// Canvas setup
-window.addEventListener("resize", setupCanvas);
-setupCanvas();
+// Main
+window.addEventListener("resize", setup);
+setup();
+draw();
 
 // Functions
-function setupCanvas() {
+function setup() {
+  won = false;
+  lost = false;
+  window.addEventListener("keydown", navigate);
+
   space = document.querySelector('canvas');
   space.width = window.innerWidth;
   space.height = window.innerHeight;
 
   pencil = space.getContext('2d');
 
-  // draw stars
+  drawStars();
+  drawShip();
+  drawHomebase();
+  drawMines();
+  pencil.drawImage(ship.model, ship.x, ship.y);
+}
+
+function drawStars() {
   stars = [];
   for (let i = 0; i < 200; i++) {
     let tempx = space.width * Math.random();
     let tempy = space.height * Math.random();
-    let tempr = Math.floor(3 * Math.random()) + 1;
+    let tempr = 2 * Math.random() + .5;
+    let tempc = starColors[Math.floor(starColors.length * Math.random())];
 
-    stars.push(new Circle(tempx, tempy, tempr, pencil));
+    stars.push(new Circle(pencil, tempx, tempy, tempr, tempc));
     stars[i].show();
   }
+}
 
-  // set ship starting position
-  ship = new Rectangle(pencil, 90, 87, "black", true);
-  ship.show();
+function drawShip() {
+  ship = {
+    x: undefined,
+    y: undefined,
+    h: 90,
+    w: 87,
+    speed: 15,
+    model: document.querySelector("img"),
+  }
+  ship.x = space.width / 2 - ship.w / 2;
+  ship.y = space.height - ship.h;
 
+  // set up a phantom ship area so mines and the homebase do not overlap
+  shipStart = new Rectangle(pencil, 90, 87, "transparent");
+  shipStart.x = ship.x;
+  shipStart.y = ship.y;
+}
 
-  // draw homebase (do not overlap ship)
+function drawHomebase() {
+  // do not overlap ship
   overlapped = false;
   do {
-    homebase = new Rectangle(pencil, 300, 200, "gainsboro");
-    overlapped = overlapping(ship, homebase);
+    homebase = new Rectangle(pencil, 300, 200, "silver");
+    overlapped = overlapping(shipStart, homebase);
   } while (overlapped);
   homebase.show();
+}
 
-  // draw mines
+function drawMines() {
   mines = [];
   for (let i = 0; i < 25; i++) {
     let tempc = mineColors[Math.floor(mineColors.length * Math.random())];
     let tempMine = new Rectangle(pencil, 50, 50, tempc);
 
     // mega overlapping check (do not overlap ship, homebase, or other mines)
-    let overlapped = false;
-    if (overlapping(ship, tempMine) || overlapping(homebase, tempMine)) i--;
+    overlapped = false;
+    if (overlapping(shipStart, tempMine) || overlapping(homebase, tempMine)) i--;
     else {
       for (let x = 0; x < mines.length; x++) {
         if (overlapping(mines[x], tempMine)) {
@@ -123,17 +136,65 @@ function setupCanvas() {
   }
 }
 
+function draw() {
+  pencil.clearRect(0, 0, space.width, space.height);
+  requestAnimationFrame(draw);
+
+  for (let star of stars) star.show();
+  homebase.show();
+  pencil.drawImage(ship.model, ship.x, ship.y);
+
+  if (isHome()) { won = true; endGame(); }
+  else if (collided()) { lost = true; endGame(); }
+  else for (let mine of mines) mine.show();
+}
+
+function navigate(e) {
+  switch (e.code) {
+    case "ArrowUp": ship.y -= ship.speed; break;
+    case "ArrowDown": ship.y += ship.speed; break;
+    case "ArrowLeft": ship.x -= ship.speed; break;
+    case "ArrowRight": ship.x += ship.speed; break;
+  }
+}
+
+function isHome() {
+  if (ship.x > homebase.x &&
+    ship.x + ship.w < homebase.x + homebase.w &&
+    ship.y > homebase.y &&
+    ship.y + ship.h < homebase.y + homebase.h)
+    return true;
+  else return false;
+}
+
+function collided() {
+  for (let mine of mines) if (overlapping(ship, mine)) return true;
+  return false;
+}
+
+function endGame() {
+  window.removeEventListener("keydown", navigate);
+  window.addEventListener("keydown", replay);
+
+  let text;
+  if (won) text = "Yippee! Press ESC to play again.";
+  if (lost) text = "Whoopsies! Press ESC to play again.";
+
+  pencil.font = "70px Tahoma";
+  pencil.fillStyle = "darkturquoise";
+  if (won || lost) pencil.fillText(text, (space.width - pencil.measureText(text).width) / 2, space.height / 2);
+}
+
+function replay(e) {
+  if (e.code == "Escape") {
+    window.removeEventListener("keydown", replay);
+    setup();
+  }
+}
+
 function overlapping(obj1, obj2) {
   return !(obj1.x + obj1.w < obj2.x ||
     obj1.x > obj2.x + obj2.w ||
     obj1.y + obj1.h < obj2.y ||
     obj1.y > obj2.y + obj2.h);
 }
-
-// function draw(obj) {
-//   requestAnimationFrame(draw);
-//   pencil.clearRect(0, 0, space.width, space.height);
-//   obj.update();
-//   obj.show();
-// }
-
