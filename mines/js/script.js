@@ -3,7 +3,7 @@ let space, pencil;
 let stars = new Array(), mines = new Array(), homebase, ship, startZone;
 let won = false, lost = false;
 let starColors = ["plum", "lightblue", "palegoldenrod", "lightsalmon", "palegreen"];
-let mineColors = ["#6D6968", "grey"];
+let mineColors = ["#565051", "#52595D", "#5C5858", "#686A6C", "#6D6968", "#757575", "#837E7C", "grey"];
 let endGameSoundPlayed = false;
 let landedSound = new Audio("sounds/landed.wav");
 let crashedSound = new Audio("sounds/crashed.wav");
