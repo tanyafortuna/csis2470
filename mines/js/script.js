@@ -17,6 +17,8 @@ class Rectangle {
     this.w = w;
     this.h = h;
     this.c = c;
+    this.xspeed = .75 * (Math.random() > .5 ? 1 : -1);
+    this.yspeed = .75 * (Math.random() > .5 ? 1 : -1);
     this.x = Math.floor(Math.random() * (space.width - this.w));
     this.y = Math.floor(Math.random() * (space.height - this.h));
   }
@@ -28,6 +30,31 @@ class Rectangle {
     this.pencil.fill();
     this.pencil.closePath();
   };
+
+  move() {
+    // wall collision
+    if (this.x < 0 || this.x > space.width - this.w) this.xspeed *= -1;
+    if (this.y < 0 || this.y > space.height - this.h) this.yspeed *= -1;
+
+    // homebase collision
+    if (overlappingRect(homebase, this)) {
+      let tempRect = this;
+      tempRect.x -= tempRect.xspeed;
+      if (!overlappingRect(homebase, tempRect)) this.xspeed *= -1;
+      else this.yspeed *= -1;
+    }
+    // startzone collision
+    if (overlappingCir(startZone, this)) {
+      let tempRect = this;
+      tempRect.x -= tempRect.xspeed;
+      if (!overlappingCir(startZone, tempRect)) this.xspeed *= -1;
+      else this.yspeed *= -1;
+    }
+
+    // finally, move
+    this.x += this.xspeed;
+    this.y += this.yspeed;
+  }
 }
 
 class Circle {
@@ -165,7 +192,12 @@ function draw() {
 
   if (isHome()) { won = true; endGame(); }
   else if (collided()) { lost = true; endGame(); }
-  else for (let mine of mines) mine.show();
+  else {
+    for (let mine of mines) {
+      mine.move();
+      mine.show();
+    }
+  }
 }
 
 function navigate(e) {
@@ -284,6 +316,15 @@ function overlappingCir(cir, obj) {
   }
 
   return corners || bottom;
+}
+
+function isPointInsideRect(x1, y1, x2, y2, xt, yt) {
+  // Given p1(x1,x1) and P2(x2,y2) (two opposite corners)
+  // P(xt,yt) is inside the rectangle if
+  // min(x1,x2) < xt < max(x1,x2) AND min(y1,y2) < yt < max(y1,y2)
+
+  return (Math.min(x1, x2) < xt) && (xt < Math.max(x1, x2)) &&
+    (Math.min(y1, y2) < yt) && (yt < Math.max(y1, y2));
 }
 
 function playRepeatedSound(sound) {
