@@ -1,7 +1,6 @@
 // Helper variables
 let space, pencil;
 let stars = new Array(), mines = new Array(), homebase, ship, startZone;
-let overlapped;
 let won = false, lost = false;
 let starColors = ["plum", "lightblue", "palegoldenrod", "lightsalmon", "palegreen"];
 let mineColors = ["#6D6968", "grey"];
@@ -78,7 +77,6 @@ class Circle {
   showStroke() {
     this.pencil.beginPath();
     this.pencil.strokeStyle = this.c;
-    // this.pencil.lineWidth = 3;
     this.pencil.arc(this.x, this.y, this.r, 0, Math.PI * 2);
     this.pencil.stroke();
     this.pencil.closePath();
@@ -132,7 +130,6 @@ function drawShip() {
     h: 90,
     w: 90,
     speed: 15,
-    // dir: "up",
     model: document.querySelector("img"),
   }
   ship.x = space.width / 2 - ship.w / 2;
@@ -140,18 +137,15 @@ function drawShip() {
 }
 
 function drawPort() {
-  // set up a port (mines and homebase will not overlap)
   startZone = new Circle(pencil, ship.x + ship.w / 2, ship.y + ship.h, 125, "white", false);
   startZone.showStroke();
 }
 
 function drawHomebase() {
   // do not overlap startzone
-  overlapped = false;
   do {
     homebase = new Rectangle(pencil, 300, 200, "silver");
-    overlapped = overlappingCir(startZone, homebase);
-  } while (overlapped);
+  } while (overlappingCir(startZone, homebase));
   homebase.show();
 }
 
@@ -161,22 +155,11 @@ function drawMines() {
     let tempc = mineColors[Math.floor(mineColors.length * Math.random())];
     let tempMine = new Rectangle(pencil, 50, 50, tempc);
 
-    // mega overlapping check (do not overlap startzone, homebase, or other mines)
-    overlapped = false;
+    // do not overlap startzone or homebase
     if (overlappingCir(startZone, tempMine) || overlappingRect(homebase, tempMine)) i--;
     else {
-      for (let x = 0; x < mines.length; x++) {
-        if (overlappingRect(mines[x], tempMine)) {
-          overlapped = true;
-          break;
-        }
-      }
-
-      if (overlapped) i--;
-      else {
-        mines.push(tempMine);
-        mines[i].show();
-      }
+      mines.push(tempMine);
+      mines[i].show();
     }
   }
 }
@@ -204,7 +187,6 @@ function navigate(e) {
   switch (e.code) {
     case "ArrowUp":
       if (ship.y - ship.speed >= 0) {
-        // rotateShip("up");
         ship.y -= ship.speed;
         playRepeatedSound("moved");
       }
@@ -212,7 +194,6 @@ function navigate(e) {
       break;
     case "ArrowDown":
       if (ship.y + ship.h + ship.speed <= space.height) {
-        // rotateShip("down");
         ship.y += ship.speed;
         playRepeatedSound("moved");
       }
@@ -220,7 +201,6 @@ function navigate(e) {
       break;
     case "ArrowLeft":
       if (ship.x - ship.speed >= 0) {
-        // rotateShip("left");
         ship.x -= ship.speed;
         playRepeatedSound("moved");
       }
@@ -228,7 +208,6 @@ function navigate(e) {
       break;
     case "ArrowRight":
       if (ship.x + ship.w + ship.speed <= space.width) {
-        // rotateShip("right");
         ship.x += ship.speed;
         playRepeatedSound("moved");
       }
@@ -318,15 +297,6 @@ function overlappingCir(cir, obj) {
   return corners || bottom;
 }
 
-function isPointInsideRect(x1, y1, x2, y2, xt, yt) {
-  // Given p1(x1,x1) and P2(x2,y2) (two opposite corners)
-  // P(xt,yt) is inside the rectangle if
-  // min(x1,x2) < xt < max(x1,x2) AND min(y1,y2) < yt < max(y1,y2)
-
-  return (Math.min(x1, x2) < xt) && (xt < Math.max(x1, x2)) &&
-    (Math.min(y1, y2) < yt) && (yt < Math.max(y1, y2));
-}
-
 function playRepeatedSound(sound) {
   if (sound == "moved") {
     let s = new Audio("sounds/moved.wav");
@@ -337,22 +307,3 @@ function playRepeatedSound(sound) {
     s.play();
   }
 }
-
-// function rotateShip(dir) {
-//   ship.translate(45, 45);
-
-//   if (dir == ship.dir) return;
-//   else {      // get back to baseline up
-//     if (ship.dir == "left") ship.rotate(Math.PI / 2);
-//     else if (ship.dir == "bottom") ship.rotate(Math.PI);
-//     else if (ship.dir == "right") ship.rotate(-Math.PI / 2);
-//   }
-
-//   // rotate to correct position
-//   if (dir == "left") ship.rotate(-Math.PI / 2);
-//   else if (dir == "bottom") ship.rotate(Math.PI);
-//   else if (dir == "right") ship.rotate(Math.PI / 2);
-
-//   ship.dir = dir;
-//   ship.translate(-45, -45);
-// }
