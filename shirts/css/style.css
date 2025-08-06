@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Slabo+27px&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Iansui&display=swap');
 
 /* Common CSS */
 * {
@@ -23,8 +24,9 @@ body {
   background-size: cover;
 }
 
-h1, h2 { font-family: "Playpen Sans"; }
-h1 { font-size: 60px; }
+/* h1, h2 { font-family: "Playpen Sans"; } */
+h1, h2 { font-family: "Iansui"; }
+h1 { font-size: 80px; }
 h2 { font-size: 40px; }
 
 
@@ -62,8 +64,6 @@ header p {
 /* Main CSS */
 main {
   display: grid;
-  /* grid-template-columns: auto max-content; */
-  /* grid-template-columns: max(750px, 63vw) max(700px, 37vw); */
   grid-template-columns: 1fr 1fr;
   place-items: center;
 }
@@ -95,9 +95,15 @@ div.divider {
   margin-bottom: 20px;
 }
 div.sizes {
-  display: flex;
+  /* display: flex;
   justify-content: space-evenly;
-  width: 700px;
+  width: 700px; */
+
+  display: grid;
+  grid-template-columns: repeat(5, max-content);
+  column-gap: 40px;
+  width: 540px;
+  margin: 0 auto;
 }
 
 input[type="color"] {
@@ -133,8 +139,8 @@ div.logo-picker input { display: none; }
 div.logo-picker img { 
   height: 115px;
   width: 115px;
-  /* opacity: .5; */
 }
+div.logo-picker img.opaque { opacity: .5; }
 div.logo-picker label { cursor: pointer; }
 
 input[type="text"] {
@@ -165,6 +171,12 @@ section.preview {
   border: 2px dashed black;
   background-size: contain;
   background-repeat: no-repeat;
+}
+
+#shirt-design div {
+  height: 37px;
+  font-size: 30px;
+  text-align: center;
 }
 
 /* Shirt shape */
