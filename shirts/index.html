@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <script src="js/script.js" defer></script>
+  <title>T's Tees</title>
+</head>
+<body>
+  <header>
+    <div class="left"><h1>T's Tees</h1></div>
+    <div class="right">
+      <p id="cart-count">12</p>
+      <img src="img/shopping-bag.png">
+    </div>
+  </header>
+  <main>
+    <section id="inputs">
+      <h2>Let's build your shirt!</h2>
+
+      <div class="divider"></div>
+
+      <div>
+        <p>What size would you like?</p>
+        <div class="sizes">
+          <div>
+            <input type="radio" id="size-xs" name="size" value="size-xs">
+            <label for="size-xs" class="radio">XSmall</label>
+          </div>
+          <div>
+            <input type="radio" id="size-s" name="size" value="size-s">
+            <label for="size-s" class="radio">Small</label>
+          </div>
+          <div>
+            <input type="radio" id="size-m" name="size" value="size-m" checked>
+            <label for="size-m" class="radio">Medium</label>
+          </div>
+          <div>
+            <input type="radio" id="size-l" name="size" value="size-l">
+            <label for="size-l" class="radio">Large</label>
+          </div>
+          <div>
+            <input type="radio" id="size-xl" name="size" value="size-xl">
+            <label for="size-xl" class="radio">XLarge</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div>
+        <p>What color shirt would you like?</p>
+        <input type="color" id="color" name="color" value="#FFFFFF">
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="logo-or-text">
+        <p class="logo-or-text">You may choose either a logo or text (up to 3 lines):</p>
+        <div class="logos">
+          <div class="logo-picker">
+            <div>
+              <input type="radio" id="logo1" name="logo" value="logo1">
+              <label for="logo1" class="radio"><img src="img/gryffindor.png"></label>
+            </div>
+            <div>
+              <input type="radio" id="logo2" name="logo" value="logo2">
+              <label for="logo2" class="radio"><img src="img/hufflepuff.png"></label>
+            </div>
+            <div>
+              <input type="radio" id="logo3" name="logo" value="logo3">
+              <label for="logo3" class="radio"><img src="img/ravenclaw.png"></label>
+            </div>
+            <div>
+              <input type="radio" id="logo4" name="logo" value="logo4">
+              <label for="logo4" class="radio"><img src="img/slytherin.png"></label>
+            </div>
+          </div>
+        </div>
+        <div class="text-picker">
+          <input type="text" id="text1" name="text">
+          <input type="text" id="text2" name="text">
+          <input type="text" id="text3" name="text">
+        </div>
+      </div>
+    </section>
+
+    <section class="preview">
+      <div id="shirt-design"></div>
+      <div id="shirt-shape">
+        <div class="shirt l arm medium"></div>
+        <div class="shirt top body medium"></div>
+        <div class="shirt bottom body medium"></div>
+        <div class="shirt r arm medium"></div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,244 @@
+@import url('https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Slabo+27px&display=swap');
+
+/* Common CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+  font-family: "Slabo 27px";
+  font-size: 22px;
+}
+
+body {
+  display: grid;
+  grid-template-rows: 90px auto;
+  /* justify-content: center;
+  align-content: center; */
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-image: url("../img/bg4.jpg");
+  background-size: cover;
+}
+
+h1, h2 { font-family: "Playpen Sans"; }
+h1 { font-size: 60px; }
+h2 { font-size: 40px; }
+
+
+
+
+/* Header CSS */
+header {
+  display: grid;
+  grid-template-columns: auto 90px;
+  width: 100vw;
+  height: 90px;
+  padding: 0 20px;
+}
+header div.right { 
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+
+header img {
+  position: absolute;
+  top: 5px;
+}
+
+header p {
+  height: 90px;
+  padding-top: 37px;
+  font-weight: 900;
+  font-size: 40px;
+  background-color: #CCCCCC;
+}
+
+
+/* Main CSS */
+main {
+  display: grid;
+  /* grid-template-columns: auto max-content; */
+  /* grid-template-columns: max(750px, 63vw) max(700px, 37vw); */
+  grid-template-columns: 1fr 1fr;
+  place-items: center;
+}
+
+div.divider {
+  width: 425px;
+  border-top: 2px dashed black;
+  margin: 0 auto;
+}
+
+
+/* Inputs CSS */
+#inputs {
+  display: grid;
+  justify-content: center;
+  align-content: space-between;
+  height: 600px;
+  width: 700px;
+  padding: 10px;
+  border-radius: 10px;
+  /* border: 2px dashed black; */
+  /* background-color: rgba(255, 255, 255, 0.75); */
+}
+
+#inputs h2 { text-align: center; }
+#inputs p { 
+  text-align: center; 
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+div.sizes {
+  display: flex;
+  justify-content: space-evenly;
+  width: 700px;
+}
+
+input[type="color"] {
+  height: 75px;
+  width: 234px;
+  padding: 2px 4px;
+  border-radius: 6px;
+  margin: 0 233px;
+}
+
+div.logo-or-text {
+  display: grid;
+  grid-template-columns: 450px 200px;
+  grid-template-rows: auto auto;
+  column-gap: 30px;
+  margin: 0 10px;
+}
+p.logo-or-text {
+  grid-column: span 2;
+}
+
+div.logos {
+  display: grid;
+  grid-template-rows: auto auto;
+}
+
+div.logo-picker {
+  display: flex;
+  justify-content: space-evenly;
+  height: 115px;
+}
+div.logo-picker input { display: none; }
+div.logo-picker img { 
+  height: 115px;
+  width: 115px;
+  /* opacity: .5; */
+}
+div.logo-picker label { cursor: pointer; }
+
+input[type="text"] {
+  width: 200px;
+  height: 35px;
+  border-radius: 5px;
+  text-indent: 5px;
+  margin-bottom: 3px;
+}
+
+
+/* Shirt preview CSS */
+section.preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 450px;
+  width: 350px;
+  position: relative;
+}
+
+#shirt-design {
+  z-index: 1;
+  height: 300px; 
+  width: 250px;
+  margin-top: 25px;
+  border-radius: 5px;
+  border: 2px dashed black;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* Shirt shape */
+#shirt-shape { position: absolute; }
+.shirt { 
+  background-color: white; 
+  transition: all 0.5s ease-in-out;
+}
+.shirt.top.body {
+  height: 180px;
+  border-top-left-radius: 15%;
+  border-top-right-radius: 15%;
+}
+.shirt.bottom.body { box-shadow: 0 3px 3px black; }
+.shirt.arm {
+  z-index: -1;
+  position: absolute;
+  top: 27px;
+  box-shadow: 0 3px 3px black;
+}
+.shirt.l.arm { rotate: 40deg; }
+.shirt.r.arm { rotate: -40deg; }
+
+/* XS */
+.xsmall.shirt.body { width: 350px; }
+.xsmall.shirt.top.body { height: 144px; }
+.xsmall.shirt.bottom.body { height: 356px; }
+.xsmall.shirt.arm {
+  height: 145px;
+  width: 80px;
+}
+.xsmall.shirt.l.arm { left: -56px; }
+.xsmall.shirt.r.arm { right: -56px; }
+
+/* S */
+.small.shirt.body { width: 375px; }
+.small.shirt.top.body { height: 162px; }
+.small.shirt.bottom.body { height: 363px; }
+.small.shirt.arm {
+  height: 160px;
+  width: 90px;
+}
+.small.shirt.l.arm { left: -59px; }
+.small.shirt.r.arm { right: -59px; }
+
+/* M */
+.medium.shirt.body { width: 400px; }
+.medium.shirt.top.body { height: 180px; }
+.medium.shirt.bottom.body { height: 370px; }
+.medium.shirt.arm {
+  height: 175px;
+  width: 100px;
+}
+.medium.shirt.l.arm { left: -61px; }
+.medium.shirt.r.arm { right: -61px; }
+
+/* L */
+.large.shirt.body { width: 425px; }
+.large.shirt.top.body { height: 196px; }
+.large.shirt.bottom.body { height: 379px; }
+.large.shirt.arm {
+  height: 190px;
+  width: 110px;
+}
+.large.shirt.l.arm { left: -65px; }
+.large.shirt.r.arm { right: -65px; }
+
+/* XL */
+.xlarge.shirt.body { width: 450px; }
+.xlarge.shirt.top.body { height: 212px; }
+.xlarge.shirt.bottom.body { height: 388px; }
+.xlarge.shirt.arm {
+  height: 205px;
+  width: 120px;
+}
+.xlarge.shirt.l.arm { left: -69px; }
+.xlarge.shirt.r.arm { right: -69px; }
