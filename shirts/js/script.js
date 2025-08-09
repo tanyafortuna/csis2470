@@ -1,50 +1,3 @@
-// Elements
-let introSection = document.getElementById("intro");
-let inputsSection = document.getElementById("inputs");
-let previewSection = document.getElementById("preview");
-let addressSection = document.getElementById("cart-address");
-let contentsSection = document.getElementById("cart-contents");
-
-let previewSectionH2 = document.querySelector("#preview h2");
-let shirtDiv = document.getElementById("shirt");
-let cartTargetDiv = document.getElementById("cart-target");
-let cartCountP = document.getElementById("cart-count");
-
-let colorPicker = document.getElementById("color");
-let sizePickerXS = document.getElementById("size-xs");
-let sizePickerS = document.getElementById("size-s");
-let sizePickerM = document.getElementById("size-m");
-let sizePickerL = document.getElementById("size-l");
-let sizePickerXL = document.getElementById("size-xl");
-let pocketPickerNo = document.getElementById("pocket-no");
-let pocketPickerL = document.getElementById("pocket-l");
-let pocketPickerR = document.getElementById("pocket-r");
-let logoPicker1 = document.getElementById("logo1");
-let logoPicker2 = document.getElementById("logo2");
-let logoPicker3 = document.getElementById("logo3");
-let logoPicker4 = document.getElementById("logo4");
-let logoPickerImg1 = document.querySelector("#logo1 + label img");
-let logoPickerImg2 = document.querySelector("#logo2 + label img");
-let logoPickerImg3 = document.querySelector("#logo3 + label img");
-let logoPickerImg4 = document.querySelector("#logo4 + label img");
-let textPicker1 = document.getElementById("text1");
-let textPicker2 = document.getElementById("text2");
-let textPicker3 = document.getElementById("text3");
-
-let shirtBodyDivs = document.querySelectorAll(".shirt");
-let shirtLPocketDiv = document.querySelector(".shirt.l.pocket");
-let shirtRPocketDiv = document.querySelector(".shirt.r.pocket");
-
-let shirtDesignDiv = document.getElementById("shirt-design");
-let textShirtDiv1 = document.querySelector(".text.one");
-let textShirtDiv2 = document.querySelector(".text.two");
-let textShirtDiv3 = document.querySelector(".text.three");
-let logoShirtImgG = document.querySelector("img.g");
-let logoShirtImgH = document.querySelector("img.h");
-let logoShirtImgR = document.querySelector("img.r");
-let logoShirtImgS = document.querySelector("img.s");
-
-
 // Shirt class
 class Shirt {
   #s;
@@ -96,10 +49,82 @@ class Shirt {
 }
 
 
+// Elements
+let introSection = document.getElementById("intro");
+let inputsSection = document.getElementById("inputs");
+let previewSection = document.getElementById("preview");
+let addressSection = document.getElementById("cart-address");
+let contentsSection = document.getElementById("cart-contents");
+
+let previewSectionH2 = document.querySelector("#preview h2");
+let shirtDiv = document.getElementById("shirt");
+let cartTargetDiv = document.getElementById("cart-target");
+let cartCountP = document.getElementById("cart-count");
+
+let colorPicker = document.getElementById("color");
+let sizePickerXS = document.getElementById("size-xs");
+let sizePickerS = document.getElementById("size-s");
+let sizePickerM = document.getElementById("size-m");
+let sizePickerL = document.getElementById("size-l");
+let sizePickerXL = document.getElementById("size-xl");
+let pocketPickerNo = document.getElementById("pocket-no");
+let pocketPickerL = document.getElementById("pocket-l");
+let pocketPickerR = document.getElementById("pocket-r");
+let logoPicker1 = document.getElementById("logo1");
+let logoPicker2 = document.getElementById("logo2");
+let logoPicker3 = document.getElementById("logo3");
+let logoPicker4 = document.getElementById("logo4");
+let logoPickerImg1 = document.querySelector("#logo1 + label img");
+let logoPickerImg2 = document.querySelector("#logo2 + label img");
+let logoPickerImg3 = document.querySelector("#logo3 + label img");
+let logoPickerImg4 = document.querySelector("#logo4 + label img");
+let textPicker1 = document.getElementById("text1");
+let textPicker2 = document.getElementById("text2");
+let textPicker3 = document.getElementById("text3");
+
+let shirtBodyDivs = document.querySelectorAll(".shirt");
+let shirtLPocketDiv = document.querySelector(".shirt.l.pocket");
+let shirtRPocketDiv = document.querySelector(".shirt.r.pocket");
+
+let shirtDesignDiv = document.getElementById("shirt-design");
+let textShirtDiv1 = document.querySelector(".text.one");
+let textShirtDiv2 = document.querySelector(".text.two");
+let textShirtDiv3 = document.querySelector(".text.three");
+let logoShirtImgG = document.querySelector("img.g");
+let logoShirtImgH = document.querySelector("img.h");
+let logoShirtImgR = document.querySelector("img.r");
+let logoShirtImgS = document.querySelector("img.s");
+
+let fnameField = document.getElementById("fname");
+let lnameField = document.getElementById("lname");
+let phoneField = document.getElementById("phone");
+let addrField = document.getElementById("addr");
+let aptField = document.getElementById("apt");
+let cityField = document.getElementById("city");
+let stateField = document.getElementById("state");
+let zipField = document.getElementById("zip");
+
+let fnameFieldMsg = document.querySelector("#fname + p");
+let lnameFieldMsg = document.querySelector("#lname + p");
+let phoneFieldMsg = document.querySelector("#phone + p");
+let addrFieldMsg = document.querySelector("#addr + p");
+let aptFieldMsg = document.querySelector("#apt + p");
+let cityFieldMsg = document.querySelector("#city + p");
+let stateFieldMsg = document.querySelector("#state + p");
+let zipFieldMsg = document.querySelector("#zip + p");
+
+
 // Helper variables
 let predesign = true;
 let shirtInProgress;
 let cartContents = [];
+const stateCodes = [
+  "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",
+  "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
+  "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
+  "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
+  "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"
+];
 
 
 // Event listeners
@@ -120,41 +145,37 @@ textPicker1.addEventListener("input", changeShirtText);
 textPicker2.addEventListener("input", changeShirtText);
 textPicker3.addEventListener("input", changeShirtText);
 
+fnameField.addEventListener("input", processFnameField);
+lnameField.addEventListener("input", processLnameField);
+phoneField.addEventListener("input", processPhoneField);
+addrField.addEventListener("input", processAddrField);
+aptField.addEventListener("input", processAptField);
+cityField.addEventListener("input", processCityField);
+stateField.addEventListener("input", processStateField);
+zipField.addEventListener("input", processZipField);
 
-// Dragging functions
-function drop() {
-  // check if item is dupe of one in the cart already
-  let dupe = false;
-  for (let item of cartContents) {
-    if (item.toString() == shirtInProgress.toString()) {
-      item.incCartQty();
-      dupe = true;
-      break;
-    }
-  }
+fnameField.addEventListener("input", isFormComplete);
+lnameField.addEventListener("input", isFormComplete);
+phoneField.addEventListener("input", isFormComplete);
+addrField.addEventListener("input", isFormComplete);
+aptField.addEventListener("input", isFormComplete);
+cityField.addEventListener("input", isFormComplete);
+stateField.addEventListener("input", isFormComplete);
+zipField.addEventListener("input", isFormComplete);
 
-  // add it to the cart if it's not a dupe
-  if (!dupe) {
-    shirtInProgress.incCartQty();
-    cartContents.push(shirtInProgress);
 
-    // clone shirt otherwise the array has a reference to the shirtInProgress
-    let newShirt = new Shirt();
-    newShirt.size = shirtInProgress.size;
-    newShirt.pocket = shirtInProgress.pocket;
-    newShirt.color = shirtInProgress.color;
-    newShirt.logo = shirtInProgress.logo;
-    newShirt.text1 = shirtInProgress.text1;
-    newShirt.text2 = shirtInProgress.text2;
-    newShirt.text3 = shirtInProgress.text3;
-    shirtInProgress = newShirt;
-  }
+// Regex
+let lettersOnlyRegex = /^[a-z]+$/i;
+let fiveNumbersOnlyRegex = /^\d{5}$/;
+let upToThreeAlphanumericRegex = /^[a-z0-9]{1,3}$/i;
+let phoneNumberRegex = /^\d{3}-\d{3}-\d{4}$/;
+let addressRegex = /^\d{1,5} [a-z]+ [a-z0-9]+(?: [a-z]+)?$/i;
+let cityRegex = /^[a-z]+(?: [a-z]+)?$/i;
 
-  // update cart total number
-  let sum = 0;
-  for (let item of cartContents) sum += item.cartQty;
-  cartCountP.textContent = sum;
-}
+
+
+
+
 
 
 // Event listener functions
@@ -335,7 +356,7 @@ function startOver() {
 }
 
 function buildShirt() {
-  shirtInProgress = new Shirt();
+  startOver();
   introSection.style.display = "none";
   addressSection.style.display = "none";
   contentsSection.style.display = "none";
@@ -423,4 +444,229 @@ function getColor(hex) {
 
 function placeOrder() {
 
+}
+
+
+// Dragging functions
+function drop() {
+  // check if item is dupe of one in the cart already
+  let dupe = false;
+  for (let item of cartContents) {
+    if (item.toString() == shirtInProgress.toString()) {
+      item.incCartQty();
+      dupe = true;
+      break;
+    }
+  }
+
+  // add it to the cart if it's not a dupe
+  if (!dupe) {
+    shirtInProgress.incCartQty();
+    cartContents.push(shirtInProgress);
+
+    // clone shirt otherwise the array has a reference to the shirtInProgress
+    let newShirt = new Shirt();
+    newShirt.size = shirtInProgress.size;
+    newShirt.pocket = shirtInProgress.pocket;
+    newShirt.color = shirtInProgress.color;
+    newShirt.logo = shirtInProgress.logo;
+    newShirt.text1 = shirtInProgress.text1;
+    newShirt.text2 = shirtInProgress.text2;
+    newShirt.text3 = shirtInProgress.text3;
+    shirtInProgress = newShirt;
+  }
+
+  // update cart total number
+  let sum = 0;
+  for (let item of cartContents) sum += item.cartQty;
+  cartCountP.textContent = sum;
+}
+
+
+// Input validation functions
+function processFnameField() {
+  if (fnameField.value == "") {
+    fnameField.classList.remove("error");
+    fnameFieldMsg.textContent = "Only letters are allowed";
+  }
+  else if (isFnameFieldValid()) {
+    fnameField.classList.remove("error");
+    fnameFieldMsg.textContent = "";
+  }
+  else {
+    fnameField.classList.add("error");
+    fnameFieldMsg.textContent = "Only letters are allowed";
+  }
+}
+function isFnameFieldValid() {
+  return isLettersOnly(fnameField.value);
+}
+
+function processLnameField() {
+  if (lnameField.value == "") {
+    lnameField.classList.remove("error");
+    lnameFieldMsg.textContent = "Only letters are allowed";
+  }
+  else if (isLnameFieldValid()) {
+    lnameField.classList.remove("error");
+    lnameFieldMsg.textContent = "";
+  }
+  else {
+    lnameField.classList.add("error");
+    lnameFieldMsg.textContent = "Only letters are allowed";
+  }
+}
+function isLnameFieldValid() {
+  return isLettersOnly(lnameField.value);
+}
+
+function processPhoneField() {
+  if (phoneField.value == "") {
+    phoneField.classList.remove("error");
+    phoneFieldMsg.textContent = "Format: xxx-xxx-xxxx";
+  }
+  else if (isPhoneFieldValid()) {
+    phoneField.classList.remove("error");
+    phoneFieldMsg.textContent = "";
+  }
+  else {
+    phoneField.classList.add("error");
+    phoneFieldMsg.textContent = "Format: xxx-xxx-xxxx";
+  }
+}
+function isPhoneFieldValid() {
+  return isPhoneNumber(phoneField.value);
+}
+
+function processAddrField() {
+  if (addrField.value == "") {
+    addrField.classList.remove("error");
+    addrFieldMsg.textContent = 'Format: "123 Main Street"';
+  }
+  else if (isAddrFieldValid()) {
+    addrField.classList.remove("error");
+    addrFieldMsg.textContent = "";
+  }
+  else {
+    addrField.classList.add("error");
+    addrFieldMsg.textContent = 'Format: "123 Main Street"';
+  }
+}
+function isAddrFieldValid() {
+  return isAddress(addrField.value);
+}
+
+function processAptField() {
+  if (aptField.value == "") {
+    aptField.classList.remove("error");
+    aptFieldMsg.textContent = "Up to 3 letters or numbers";
+  }
+  else if (isAptFieldValid()) {
+    aptField.classList.remove("error");
+    aptFieldMsg.textContent = "";
+  }
+  else {
+    aptField.classList.add("error");
+    aptFieldMsg.textContent = "Up to 3 letters or numbers";
+  }
+}
+function isAptFieldValid() {
+  return isUpToThreeAlphanumeric(aptField.value);
+}
+
+function processCityField() {
+  if (cityField.value == "") {
+    cityField.classList.remove("error");
+    cityFieldMsg.textContent = "Only letters are allowed";
+  }
+  else if (isCityFieldValid()) {
+    cityField.classList.remove("error");
+    cityFieldMsg.textContent = "";
+  }
+  else {
+    cityField.classList.add("error");
+    cityFieldMsg.textContent = "Only letters are allowed";
+  }
+}
+function isCityFieldValid() {
+  return isCity(cityField.value);
+}
+
+function processStateField() {
+  if (stateField.value == "") {
+    stateField.classList.remove("error");
+    stateFieldMsg.textContent = "Use the 2-letter code";
+  }
+  else if (isStateFieldValid()) {
+    stateField.classList.remove("error");
+    stateFieldMsg.textContent = "";
+  }
+  else {
+    stateField.classList.add("error");
+    stateFieldMsg.textContent = "Use the 2-letter code";
+  }
+}
+function isStateFieldValid() {
+  return isState(stateField.value);
+}
+
+function processZipField() {
+  if (zipField.value == "") {
+    zipField.classList.remove("error");
+    zipFieldMsg.textContent = "Must be 5 numbers";
+  }
+  else if (isZipFieldValid()) {
+    zipField.classList.remove("error");
+    zipFieldMsg.textContent = "";
+  }
+  else {
+    zipField.classList.add("error");
+    zipFieldMsg.textContent = "Must be 5 numbers";
+  }
+}
+function isZipFieldValid() {
+  return isFiveNumbersOnly(zipField.value);
+}
+
+function isFormComplete() {
+  if (isFnameFieldValid() && isLnameFieldValid() &&
+    isPhoneFieldValid() && isAddrFieldValid() &&
+    (isAptFieldValid() || aptField.value == "") &&
+    isCityFieldValid() && isStateFieldValid() &&
+    isZipFieldValid()
+  ) {
+    document.getElementById("place-order").removeAttribute("disabled");
+  }
+  else
+    document.getElementById("place-order").setAttribute("disabled", true);
+}
+
+
+// Regex functions
+function isLettersOnly(x) {
+  return lettersOnlyRegex.test(x);
+}
+
+function isFiveNumbersOnly(x) {
+  return fiveNumbersOnlyRegex.test(x);
+}
+
+function isUpToThreeAlphanumeric(x) {
+  return upToThreeAlphanumericRegex.test(x);
+}
+
+function isPhoneNumber(x) {
+  return phoneNumberRegex.test(x);
+}
+
+function isAddress(x) {
+  return addressRegex.test(x);
+}
+
+function isCity(x) {
+  return cityRegex.test(x);
+}
+
+function isState(x) {
+  return stateCodes.includes(x.toUpperCase());
 }

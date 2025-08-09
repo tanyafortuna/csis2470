@@ -16,8 +16,7 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-image: url("../img/bg4.jpg");
-  background-size: cover;
+  background: radial-gradient(circle at 20% 30%, #89f7fe, transparent 60%), radial-gradient(circle at 80% 70%, #66a6ff, transparent 60%);
 }
 
 h1 { font-size: 70px; }
@@ -52,7 +51,6 @@ header p {
   padding-top: 44px;
   font-weight: 900;
   font-size: 32px;
-  background-color: #CCCCCC;
 }
 
 
@@ -124,8 +122,7 @@ fieldset.logo-or-text {
   display: grid;
   grid-template-columns: 420px 180px;
   column-gap: 30px;
-  width: 685px;
-  padding-left: 0px;
+  width: 670px;
 }
 
 div.logos {
@@ -189,7 +186,7 @@ button#build-shirt { margin-bottom: 200px; }
 #preview h2 {
   width: fit-content;
   border-radius: 30px;
-  background-color: #4EB4FE;
+  background-color: #66a6ff;
   padding: 10px 75px 10px 40px;
   margin: 0 auto 30px auto;
   opacity: 0;
@@ -329,14 +326,20 @@ button#build-shirt { margin-bottom: 200px; }
   width: 700px;
 }
 
-#cart-address p { margin-left: 35px; }
+#cart-address p.required { margin-left: 35px; }
 
 #cart-address fieldset { 
   display: grid;
   grid-template-columns: repeat(3, 180px);
   column-gap: 33px;
   margin: 45px 30px;
-  padding: 25px 30px 20px 30px;
+  padding: 25px 30px 0 30px;
+}
+
+#cart-address p.message {
+  height: 17px;
+  font-size: 14px;
+  margin-bottom: 20px;
 }
 
 #cart-address .str-addr { grid-column: span 2; }
@@ -345,8 +348,10 @@ button#build-shirt { margin-bottom: 200px; }
 #cart-address label { display: block; }
 #cart-address input {
   display: block;
-  margin: 3px 0 20px 0;
+  margin: 3px 0;
 }
+
+#cart-address input.error { border-color: red; }
 
 
 /* Cart contents CSS */
@@ -364,12 +369,11 @@ button#build-shirt { margin-bottom: 200px; }
   width: 670px;
   margin: 45px 30px;
   padding: 24px 30px 20px 30px;
-  border: 1px solid slategrey;
   border-radius: 10px;
 }
 
-#cart-contents #summary { background-color: #4EB4FE; }
-#cart-contents .cart-item { background-color: #ECECEC; }
+#cart-contents #summary { background-color: #66a6ff; }
+#cart-contents .cart-item { background-color: white; }
 
 .summary { grid-column: span 3; }
 

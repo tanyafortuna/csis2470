@@ -103,7 +103,7 @@
     </section>
 
     <section id="preview">
-      <h2>Drag to cart when you're finished! <img class="icon" src="img/arrow-out.png"></h2>
+      <h2>Drag to the cart when you're finished! <img class="icon" src="img/arrow-out.png"></h2>
       <div id="shirt">
         
         <div id="shirt-design">
@@ -127,21 +127,24 @@
     </section>
     
     <section id="cart-address">
-      <p>All fields are required unless otherwise noted.</p>
+      <p class="required">All fields are required unless otherwise noted.</p>
 
       <fieldset class="contact">
         <legend>Contact information</legend>
         <div>
           <label for="fname">First name</label>
           <input type="text" id="fname" name="text">
+          <p class="message">Only letters are allowed</p>
         </div>
         <div>
           <label for="lname">Last name</label>
           <input type="text" id="lname" name="text">
+          <p class="message">Only letters are allowed</p>
         </div>
         <div>
           <label for="phone">Phone number</label>
           <input type="text" id="phone" name="text">
+          <p class="message">Format: xxx-xxx-xxxx</p>
         </div>
 
       </fieldset>
@@ -151,26 +154,31 @@
         <div class="str-addr">
           <label for="addr">Street Address</label>
           <input type="text" id="addr" name="text">
+          <p class="message">Format: "123 Main Street"</p>
         </div>
         
         <div>
           <label for="apt">Apt (optional)</label>
           <input type="text" id="apt" name="text">
+          <p class="message">Up to 3 letters or numbers</p>
         </div>
 
         <div>
           <label for="city">City</label>
           <input type="text" id="city" name="text">
+          <p class="message">Only letters are allowed</p>
         </div>
         
         <div>
           <label for="state">State</label>
           <input type="text" id="state" name="text">
+          <p class="message">Use the 2-letter code</p>
         </div>
         
         <div>
           <label for="zip">Zip</label>
           <input type="text" id="zip" name="text">
+          <p class="message">Must be 5 numbers</p>
         </div>
 
       </fieldset>
