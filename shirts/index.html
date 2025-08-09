@@ -9,19 +9,20 @@
 <body>
   <header>
     <div class="left"><h1>T's Tees</h1></div>
-    <div class="right">
-      <p id="cart-count">12</p>
+    <div class="right" id="cart-target">
+      <p id="cart-count"></p>
       <img src="img/shopping-bag.png">
     </div>
   </header>
+
   <main>
+    <section id="intro">
+      <button id="build-shirt" onclick="buildShirt();">Build a shirt</button>
+    </section>
+
     <section id="inputs">
-      <h2>Design your shirt</h2>
-
-      <div class="divider"></div>
-
-      <div>
-        <p>What size would you like?</p>
+      <fieldset>
+        <legend>Size</legend>
         <div class="sizes">
           <div>
             <input type="radio" id="size-xs" name="size" value="size-xs">
@@ -44,19 +45,33 @@
             <label for="size-xl" class="radio">XLarge</label>
           </div>
         </div>
-      </div>
+      </fieldset>
 
-      <div class="divider"></div>
+      <fieldset>
+        <legend>Pocket</legend>
+        <div class="pockets">
+          <div>
+            <input type="radio" id="pocket-no" name="pocket" value="pocket-no" checked>
+            <label for="pocket-no" class="radio">No pocket</label>
+          </div>
+          <div>
+            <input type="radio" id="pocket-l" name="pocket" value="pocket-l">
+            <label for="pocket-l" class="radio">Left-side</label>
+          </div>
+          <div>
+            <input type="radio" id="pocket-r" name="pocket" value="pocket-r">
+            <label for="pocket-r" class="radio">Right-side</label>
+          </div>
+        </div>
+      </fieldset>
 
-      <div>
-        <p>What color shirt would you like?</p>
+      <fieldset>
+        <legend>Color</legend>
         <input type="color" id="color" name="color" value="#FFFFFF">
-      </div>
+      </fieldset>
 
-      <div class="divider"></div>
-
-      <div class="logo-or-text">
-        <p class="logo-or-text">You may choose either a logo or text (up to 3 lines):</p>
+      <fieldset class="logo-or-text">
+        <legend>Your choice: logo or text</legend>
         <div class="logos">
           <div class="logo-picker">
             <div>
@@ -82,21 +97,96 @@
           <input type="text" id="text2" name="text">
           <input type="text" id="text3" name="text">
         </div>
-      </div>
+      </fieldset>
+
+      <button id="start-over" onclick="startOver();">Start over</button>
     </section>
 
-    <section class="preview">
-      <div id="shirt-design">
-        <div class="text one"></div>
-        <div class="text two"></div>
-        <div class="text three"></div>
+    <section id="preview">
+      <h2>Drag to cart when you're finished! <img class="icon" src="img/arrow-out.png"></h2>
+      <div id="shirt">
+        
+        <div id="shirt-design">
+          <p class="text one"></p>
+          <p class="text two"></p>
+          <p class="text three"></p>
+          <img class="g" src="img/gryffindor.png">
+          <img class="h" src="img/hufflepuff.png">
+          <img class="r" src="img/ravenclaw.png">
+          <img class="s" src="img/slytherin.png">
+        </div>
+        <div id="shirt-shape">
+          <div class="shirt l arm medium"></div>
+          <div class="shirt top body medium"></div>
+          <div class="shirt l pocket medium"></div>
+          <div class="shirt r pocket medium"></div>
+          <div class="shirt bottom body medium"></div>
+          <div class="shirt r arm medium"></div>
+        </div>
       </div>
-      <div id="shirt-shape">
-        <div class="shirt l arm medium"></div>
-        <div class="shirt top body medium"></div>
-        <div class="shirt bottom body medium"></div>
-        <div class="shirt r arm medium"></div>
+    </section>
+    
+    <section id="cart-address">
+      <p>All fields are required unless otherwise noted.</p>
+
+      <fieldset class="contact">
+        <legend>Contact information</legend>
+        <div>
+          <label for="fname">First name</label>
+          <input type="text" id="fname" name="text">
+        </div>
+        <div>
+          <label for="lname">Last name</label>
+          <input type="text" id="lname" name="text">
+        </div>
+        <div>
+          <label for="phone">Phone number</label>
+          <input type="text" id="phone" name="text">
+        </div>
+
+      </fieldset>
+
+      <fieldset>
+        <legend>Shipping information</legend>
+        <div class="str-addr">
+          <label for="addr">Street Address</label>
+          <input type="text" id="addr" name="text">
+        </div>
+        
+        <div>
+          <label for="apt">Apt (optional)</label>
+          <input type="text" id="apt" name="text">
+        </div>
+
+        <div>
+          <label for="city">City</label>
+          <input type="text" id="city" name="text">
+        </div>
+        
+        <div>
+          <label for="state">State</label>
+          <input type="text" id="state" name="text">
+        </div>
+        
+        <div>
+          <label for="zip">Zip</label>
+          <input type="text" id="zip" name="text">
+        </div>
+
+      </fieldset>
+
+      <button id="place-order" onclick="placeOrder();" disabled>Place order</button>
+    </section>
+
+    <section id="cart-contents">
+      <button id="build-another" onclick="buildShirt();">Build another</button>
+
+      <div id="summary">
+        <div class="summary"></div>
+        <div class="right-align"></div>
       </div>
+
+      <div id="items"></div>
     </section>
   </main>
 </body>

@@ -1,6 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100..800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Slabo+27px&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Iansui&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mozilla+Headline:wght@200..700&display=swap');
 
 /* Common CSS */
 * {
@@ -8,15 +6,13 @@
   padding: 0;
   box-sizing: border-box;
   user-select: none;
-  font-family: "Slabo 27px";
-  font-size: 22px;
+  font-family: "Mozilla Headline";
+  font-size: 20px;
 }
 
 body {
   display: grid;
   grid-template-rows: 90px auto;
-  /* justify-content: center;
-  align-content: center; */
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -24,12 +20,11 @@ body {
   background-size: cover;
 }
 
-/* h1, h2 { font-family: "Playpen Sans"; } */
-h1, h2 { font-family: "Iansui"; }
-h1 { font-size: 80px; }
-h2 { font-size: 40px; }
-
-
+h1 { font-size: 70px; }
+h2 { 
+  font-size: 26px; 
+  font-weight: 500;
+}
 
 
 /* Header CSS */
@@ -40,12 +35,12 @@ header {
   height: 90px;
   padding: 0 20px;
 }
-header div.right { 
+
+#cart-target { 
   position: relative;
   display: flex;
   justify-content: center;
 }
-
 
 header img {
   position: absolute;
@@ -54,9 +49,9 @@ header img {
 
 header p {
   height: 90px;
-  padding-top: 37px;
+  padding-top: 44px;
   font-weight: 900;
-  font-size: 40px;
+  font-size: 32px;
   background-color: #CCCCCC;
 }
 
@@ -66,6 +61,7 @@ main {
   display: grid;
   grid-template-columns: 1fr 1fr;
   place-items: center;
+  margin-bottom: 50px;
 }
 
 div.divider {
@@ -77,52 +73,59 @@ div.divider {
 
 /* Inputs CSS */
 #inputs {
-  display: grid;
+  display: none;
   justify-content: center;
   align-content: space-between;
-  height: 600px;
+  height: 650px;
   width: 700px;
   padding: 10px;
   border-radius: 10px;
-  /* border: 2px dashed black; */
-  /* background-color: rgba(255, 255, 255, 0.75); */
 }
 
-#inputs h2 { text-align: center; }
-#inputs p { 
-  text-align: center; 
-  margin: 0 auto;
-  margin-bottom: 20px;
+fieldset {
+  width: 670px;
+  padding: 15px;
+  padding-bottom: 20px;
+  border-radius: 10px;
 }
-div.sizes {
-  /* display: flex;
-  justify-content: space-evenly;
-  width: 700px; */
 
+legend { padding: 0 10px; }
+
+div.sizes, div.pockets {
   display: grid;
-  grid-template-columns: repeat(5, max-content);
   column-gap: 40px;
-  width: 540px;
+  width: fit-content;
   margin: 0 auto;
+}
+div.sizes { 
+  grid-template-columns: repeat(5, max-content);
+}
+div.pockets { 
+  grid-template-columns: repeat(3, max-content);
+}
+
+input[type="radio"] {
+  height: 18px;
+  width: 18px;
+  margin-right: 3px;
 }
 
 input[type="color"] {
+  display: block;
   height: 75px;
   width: 234px;
   padding: 2px 4px;
   border-radius: 6px;
-  margin: 0 233px;
+  margin: 0 auto;
+  margin-bottom: 5px;
 }
 
-div.logo-or-text {
+fieldset.logo-or-text {
   display: grid;
-  grid-template-columns: 450px 200px;
-  grid-template-rows: auto auto;
+  grid-template-columns: 420px 180px;
   column-gap: 30px;
-  margin: 0 10px;
-}
-p.logo-or-text {
-  grid-column: span 2;
+  width: 685px;
+  padding-left: 0px;
 }
 
 div.logos {
@@ -138,46 +141,97 @@ div.logo-picker {
 div.logo-picker input { display: none; }
 div.logo-picker img { 
   height: 115px;
-  width: 115px;
+  width: 110px;
 }
 div.logo-picker img.opaque { opacity: .5; }
 div.logo-picker label { cursor: pointer; }
 
 input[type="text"] {
-  width: 200px;
+  width: 180px;
   height: 35px;
   border-radius: 5px;
   text-indent: 5px;
   margin-bottom: 3px;
+  outline: none;
 }
+
+button {
+  display: block;
+  width: 200px;
+  height: 40px;
+  margin: 0 auto;
+  border-radius: 6px;
+  border: 1px solid slategrey;
+  cursor: pointer;
+  box-shadow: 0 3px 3px slategrey;
+  transition: all .15s;
+}
+button:active:enabled {
+  box-shadow: none;
+  transform: translateY(3px);
+}
+button:disabled { box-shadow: none; }
+
+button#start-over { margin-top: 10px; }
+button#build-shirt { margin-bottom: 200px; }
 
 
 /* Shirt preview CSS */
-section.preview {
+#shirt {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 450px;
-  width: 350px;
+  height: 555px;
+  width: 620px;
   position: relative;
 }
 
-#shirt-design {
-  z-index: 1;
-  height: 300px; 
-  width: 250px;
-  margin-top: 25px;
-  border-radius: 5px;
-  border: 2px dashed black;
-  background-size: contain;
-  background-repeat: no-repeat;
+#preview h2 {
+  width: fit-content;
+  border-radius: 30px;
+  background-color: #4EB4FE;
+  padding: 10px 75px 10px 40px;
+  margin: 0 auto 30px auto;
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
 }
 
-#shirt-design div {
+#preview img.icon {
+  position: absolute;
+  padding-left: 10px;
+  height: 34px;
+}
+
+
+/* Shirt design CSS */
+#shirt-design {
+  z-index: 1;
+  position: relative;
+  height: 300px; 
+  width: 300px;
+  border-radius: 5px;
+  transition: all 0.5s ease-in-out;
+}
+
+#shirt-design p {
   height: 37px;
   font-size: 30px;
   text-align: center;
+  opacity: 1;
+  transition: all 0.5s ease-in-out;
 }
+#shirt-design p.inactive { opacity: 0; }
+
+#shirt-design img {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  transform-origin: center center;
+  transform: scale(0);
+  transition: all 1s ease-in-out;
+}
+#shirt-design img.active { transform: scale(1); }
 
 /* Shirt shape */
 #shirt-shape { position: absolute; }
@@ -199,6 +253,18 @@ section.preview {
 }
 .shirt.l.arm { rotate: 40deg; }
 .shirt.r.arm { rotate: -40deg; }
+.shirt.pocket {
+  position: absolute;
+  display: none;
+  height: 100px;
+  width: 100px;
+  top: 150px;
+  box-shadow: 0 1px 4px black;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+.shirt.l.pocket { left: 50px; }
+.shirt.r.pocket { right: 50px; }
 
 /* XS */
 .xsmall.shirt.body { width: 350px; }
@@ -254,3 +320,62 @@ section.preview {
 }
 .xlarge.shirt.l.arm { left: -69px; }
 .xlarge.shirt.r.arm { right: -69px; }
+
+
+/* Cart address CSS */
+#cart-address { 
+  display: none; 
+  height: 700px;
+  width: 700px;
+}
+
+#cart-address p { margin-left: 35px; }
+
+#cart-address fieldset { 
+  display: grid;
+  grid-template-columns: repeat(3, 180px);
+  column-gap: 33px;
+  margin: 45px 30px;
+  padding: 25px 30px 20px 30px;
+}
+
+#cart-address .str-addr { grid-column: span 2; }
+#cart-address .str-addr input { width: 393px; }
+
+#cart-address label { display: block; }
+#cart-address input {
+  display: block;
+  margin: 3px 0 20px 0;
+}
+
+
+/* Cart contents CSS */
+#cart-contents { 
+  display: none; 
+  overflow-y: scroll;
+  height: 700px;
+  width: 700px;
+}
+
+#cart-contents #summary, 
+#cart-contents .cart-item {
+  display: grid;
+  grid-template-columns: 1fr 65px 100px 100px;
+  width: 670px;
+  margin: 45px 30px;
+  padding: 24px 30px 20px 30px;
+  border: 1px solid slategrey;
+  border-radius: 10px;
+}
+
+#cart-contents #summary { background-color: #4EB4FE; }
+#cart-contents .cart-item { background-color: #ECECEC; }
+
+.summary { grid-column: span 3; }
+
+#cart-contents .right-align {
+  text-align: right;
+}
+
+#cart-contents p { margin-bottom: 2px; }
+#cart-contents span.fancy { text-decoration: underline; }
