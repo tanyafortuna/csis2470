@@ -375,7 +375,11 @@ button#build-shirt { margin-bottom: 200px; }
   height: 700px;
   width: 700px;
   overflow-y: scroll;
+  overflow-x: hidden;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
+#cart-contents::-webkit-scrollbar { display: none; }
 
 #cart-contents #summary, 
 #cart-contents .cart-item {
@@ -407,7 +411,12 @@ span.fancy { text-decoration: underline; }
   height: 700px;
   width: 700px;
   overflow-y: scroll;
+  overflow-x: hidden;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
+#thanks::-webkit-scrollbar { display: none; }
+
 
 #thanks p.appreciate, #thanks h2 { padding: 15px; }
 
