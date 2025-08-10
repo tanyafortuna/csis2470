@@ -74,7 +74,7 @@ div.divider {
   display: none;
   justify-content: center;
   align-content: space-between;
-  height: 650px;
+  height: 700px;
   width: 700px;
   padding: 10px;
   border-radius: 10px;
@@ -120,14 +120,10 @@ input[type="color"] {
 
 fieldset.logo-or-text {
   display: grid;
-  grid-template-columns: 420px 180px;
-  column-gap: 30px;
-  width: 670px;
-}
-
-div.logos {
-  display: grid;
+  /* grid-template-columns: 420px 180px; */
+  /* column-gap: 30px; */
   grid-template-rows: auto auto;
+  width: 670px;
 }
 
 div.logo-picker {
@@ -143,13 +139,27 @@ div.logo-picker img {
 div.logo-picker img.opaque { opacity: .5; }
 div.logo-picker label { cursor: pointer; }
 
+div.text-picker {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 15px;
+}
+
+div.text-picker p.msg {
+  height: 17px;
+  font-size: 14px;
+  color: red;
+  opacity: 0;
+}
+
 input[type="text"] {
-  width: 180px;
+  width: 205px;
   height: 35px;
   border-radius: 5px;
   text-indent: 5px;
   margin-bottom: 3px;
   outline: none;
+  font-size: 19px;
 }
 
 button {
@@ -229,6 +239,12 @@ button#build-shirt { margin-bottom: 200px; }
   transition: all 1s ease-in-out;
 }
 #shirt-design img.active { transform: scale(1); }
+
+#shirt-design #measurer {
+  position: absolute;
+  visibility: hidden;
+  white-space: nowrap;
+}
 
 /* Shirt shape */
 #shirt-shape { position: absolute; }
@@ -401,3 +417,5 @@ span.fancy { text-decoration: underline; }
 .order-info p { padding: 15px; }
 
 .shipping-info { padding: 15px; }
+
+#go-again { margin-top: 15px; }

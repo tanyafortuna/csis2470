@@ -93,13 +93,22 @@
           </div>
         </div>
         <div class="text-picker">
-          <input type="text" id="text1" name="text">
-          <input type="text" id="text2" name="text">
-          <input type="text" id="text3" name="text">
+          <div>
+            <input type="text" id="text1" name="text">
+            <p class="msg">Must be within length limit</p>
+          </div>
+          <div>
+            <input type="text" id="text2" name="text">
+            <p class="msg">Must be within length limit</p>
+          </div>
+          <div>
+            <input type="text" id="text3" name="text">
+            <p class="msg">Must be within length limit</p>
+          </div>
         </div>
       </fieldset>
 
-      <button id="start-over" onclick="startOver();">Start over</button>
+      <button id="start-over" onclick="startOver();">Reset design</button>
     </section>
 
     <section id="preview">
@@ -110,6 +119,7 @@
           <p class="text one"></p>
           <p class="text two"></p>
           <p class="text three"></p>
+          <p id="measurer" aria-hidden="true"></p>
           <img class="g" src="img/gryffindor.png">
           <img class="h" src="img/hufflepuff.png">
           <img class="r" src="img/ravenclaw.png">
@@ -187,7 +197,7 @@
     </section>
 
     <section id="cart-contents">
-      <button id="build-another" onclick="buildShirt();">Build another</button>
+      <button id="build-another" onclick="buildShirt();">Build new shirt</button>
 
       <div id="summary">
         <div class="summary"></div>
@@ -207,6 +217,8 @@
       
       <h2>Shipping info</h2>
       <div class="shipping-info"></div>
+
+      <button id="go-again" onclick="buildShirt();">Make more</button>
     </section>
   </main>
 </body>

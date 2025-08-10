@@ -86,6 +86,7 @@ let logoPickerImg4 = document.querySelector("#logo4 + label img");
 let textPicker1 = document.getElementById("text1");
 let textPicker2 = document.getElementById("text2");
 let textPicker3 = document.getElementById("text3");
+let textMeasurer = document.getElementById("measurer");
 
 let shirtBodyDivs = document.querySelectorAll(".shirt");
 let shirtLPocketDiv = document.querySelector(".shirt.l.pocket");
@@ -130,6 +131,9 @@ const stateCodes = [
   "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
   "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"
 ];
+let shipFields = [fnameField, lnameField, phoneField, addrField,
+  aptField, cityField, stateField, zipField];
+
 
 
 // Event listeners
@@ -149,6 +153,9 @@ logoPicker4.addEventListener("change", changeShirtLogo);
 textPicker1.addEventListener("input", changeShirtText);
 textPicker2.addEventListener("input", changeShirtText);
 textPicker3.addEventListener("input", changeShirtText);
+textPicker1.addEventListener("beforeinput", checkTextLength);
+textPicker2.addEventListener("beforeinput", checkTextLength);
+textPicker3.addEventListener("beforeinput", checkTextLength);
 
 fnameField.addEventListener("input", processFnameField);
 lnameField.addEventListener("input", processLnameField);
@@ -176,11 +183,6 @@ let upToThreeAlphanumericRegex = /^[a-z0-9]{1,3}$/i;
 let phoneNumberRegex = /^\d{3}-\d{3}-\d{4}$/;
 let addressRegex = /^\d{1,5} [a-z]+ [a-z0-9]+(?: [a-z]+)?$/i;
 let cityRegex = /^[a-z]+(?: [a-z]+)?$/i;
-
-
-
-
-
 
 
 // Event listener functions
@@ -340,6 +342,42 @@ function removeShirtText() {
   textPicker3.value = "";
 }
 
+function checkTextLength(e) {
+  let input, id;
+  switch (e.srcElement) {
+    case textPicker1: input = textPicker1; id = "text1"; break;
+    case textPicker2: input = textPicker2; id = "text2"; break;
+    case textPicker3: input = textPicker3; id = "text3"; break;
+  }
+
+  // get out of here if it's a deletion
+  let isDeletion = e.inputType && e.inputType.startsWith('delete');
+  if (isDeletion) return;
+
+  // covers pasted text
+  let insertText = '';
+  if (e.inputType === 'insertFromPaste' && e.dataTransfer)
+    insertText = e.dataTransfer.getData('text');
+  else
+    insertText = e.data ?? '';
+
+  // in case users enter text in the middle rather than end
+  let start = input.selectionStart ?? input.value.length;
+  let end = input.selectionEnd ?? input.value.length;
+  let next = input.value.slice(0, start) + insertText + input.value.slice(end);
+
+  // check it
+  textMeasurer.textContent = next;
+  if (textMeasurer.offsetWidth > 300) {
+    // don’t accept the input
+    e.preventDefault();
+
+    // visual feedback
+    input.animate([{ opacity: 1 }, { opacity: 0.5 }, { opacity: 1 }], { duration: 200 });
+    document.querySelector(`#${id} + p`).animate([{ opacity: 0 }, { opacity: 1 }, { opacity: 0 }], { duration: 1000 });
+  }
+}
+
 
 // Other functions
 function startOver() {
@@ -360,8 +398,7 @@ function startOver() {
   removeShirtText();
 
   if (cartContents.length === 0) {
-    cartTargetDiv.removeEventListener('dragover', function(e) { e.preventDefault(); });
-    cartTargetDiv.addEventListener('drop', drop);
+    cartTargetDiv.addEventListener('drop', addToCart);
     cartTargetDiv.style.cursor = "pointer";
     cartTargetDiv.setAttribute("onclick", "showCart();");
     shirtDiv.setAttribute("draggable", "true");
@@ -380,7 +417,7 @@ function buildShirt() {
 
   // allow shirt to be draggable and cart to be the target
   cartTargetDiv.addEventListener('dragover', function(e) { e.preventDefault(); });
-  cartTargetDiv.addEventListener('drop', drop);
+  cartTargetDiv.addEventListener('drop', addToCart);
   cartTargetDiv.style.cursor = "pointer";
   cartTargetDiv.setAttribute("onclick", "showCart();");
   shirtDiv.setAttribute("draggable", "true");
@@ -389,6 +426,7 @@ function buildShirt() {
 function showCart() {
   inputsSection.style.display = "none";
   previewSection.style.display = "none";
+  thanksSection.style.display = "none";
   addressSection.style.display = "block";
   contentsSection.style.display = "block";
   createCartSummary();
@@ -399,14 +437,22 @@ function createCartSummary() {
   let totalItems = 0;
   for (let item of cartContents) totalItems += item.cartQty;
 
-  let plural = (totalItems > 1 ? "s" : "");
-  let html = '<p><span class="fancy">Order Summary</span></p>';
-  html += `<p>You're buying ${totalItems} shirt${plural}.</p>`;
-  document.querySelector(".summary").innerHTML = html;
+  let html;
+  if (totalItems == 0) {
+    html = "<p>You've got to create some shirts before you check out!</p>";
+    document.querySelector(".summary").innerHTML = html;
+  }
+  else {
+    let plural = (totalItems > 1 ? "s" : "");
+    html = '<p><span class="fancy">Order Summary</span></p>';
+    html += `<p>You're buying ${totalItems} shirt${plural}.</p>`;
+    document.querySelector(".summary").innerHTML = html;
 
-  html = '<p><span class="fancy">Total</span>:</p>';
-  html += `<p>$${totalItems * 24}.00</p>`;
-  document.querySelector("#summary .right-align").innerHTML = html;
+    html = '<p><span class="fancy">Total</span>:</p>';
+    html += `<p>$${totalItems * 24}.00</p>`;
+    document.querySelector("#summary .right-align").innerHTML = html;
+  }
+
 }
 
 function createCartCards() {
@@ -417,8 +463,12 @@ function createCartCards() {
     html += `<p><span class="fancy">Size</span>: ${item.size}</p>`;
 
     let color = (item.color).replace("#", "");
-    getColor(color);
-    html += `<p><span class="fancy">Color</span>: <span class="C${color}">Finding...</span></p>`;
+    html += `<p><span class="fancy">Color</span>: <span class="C${color}">`;
+    if (item.colorName == "") {
+      getColor(color);
+      html += 'Finding...</span></p>';
+    }
+    else html += `${item.colorName}</span></p>`;
 
     if (item.logo != "")
       html += `<p class="logo"><span class="fancy">Logo</span>: ${item.logo}</p>`;
@@ -470,6 +520,8 @@ function placeOrder() {
   console.log(cartContents);
   cartContents = [];
   cartCountP.textContent = "";
+  for (let field of shipFields) field.value = "";
+  document.getElementById("place-order").setAttribute("disabled", true);
 }
 
 function createString(obj) {
@@ -527,7 +579,7 @@ function createShippingSummary() {
 
 
 // Dragging functions
-function drop() {
+function addToCart() {
   // check if item is dupe of one in the cart already
   let dupe = false;
   for (let item of cartContents) {
@@ -708,11 +760,14 @@ function isZipFieldValid() {
 }
 
 function isFormComplete() {
+  let numItems = 0;
+  for (let item of cartContents) numItems += item.cartQty;
+
   if (isFnameFieldValid() && isLnameFieldValid() &&
     isPhoneFieldValid() && isAddrFieldValid() &&
     (isAptFieldValid() || aptField.value == "") &&
     isCityFieldValid() && isStateFieldValid() &&
-    isZipFieldValid()
+    isZipFieldValid() && numItems > 0
   ) {
     document.getElementById("place-order").removeAttribute("disabled");
   }
