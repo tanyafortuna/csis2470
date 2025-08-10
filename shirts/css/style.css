@@ -98,12 +98,8 @@ div.sizes, div.pockets {
   width: fit-content;
   margin: 0 auto;
 }
-div.sizes { 
-  grid-template-columns: repeat(5, max-content);
-}
-div.pockets { 
-  grid-template-columns: repeat(3, max-content);
-}
+div.sizes {  grid-template-columns: repeat(5, max-content); }
+div.pockets { grid-template-columns: repeat(3, max-content); }
 
 input[type="radio"] {
   height: 18px;
@@ -145,6 +141,7 @@ div.text-picker {
   justify-content: space-around;
   padding-top: 15px;
 }
+div.text-picker input.opaque { opacity: .5; }
 
 div.text-picker p.msg {
   height: 17px;

@@ -238,10 +238,8 @@ function changeShirtPocket() {
 
 function changeShirtLogo() {
   removeShirtText();
-  logoPickerImg1.classList.remove("opaque");
-  logoPickerImg2.classList.remove("opaque");
-  logoPickerImg3.classList.remove("opaque");
-  logoPickerImg4.classList.remove("opaque");
+  changeShirtLogoOpacity(false);
+  changeShirtTextOpacity(true);
   logoShirtImgG.classList.remove("active");
   logoShirtImgH.classList.remove("active");
   logoShirtImgR.classList.remove("active");
@@ -296,9 +294,23 @@ function changeShirtLogoOpacity(on) {
   }
 }
 
+function changeShirtTextOpacity(on) {
+  if (on) {
+    textPicker1.classList.add("opaque");
+    textPicker2.classList.add("opaque");
+    textPicker3.classList.add("opaque");
+  }
+  else {
+    textPicker1.classList.remove("opaque");
+    textPicker2.classList.remove("opaque");
+    textPicker3.classList.remove("opaque");
+  }
+}
+
 function changeShirtText(e) {
   removeShirtLogo();
   changeShirtLogoOpacity(true);
+  changeShirtTextOpacity(false);
   logoPicker1.checked = false;
   logoPicker2.checked = false;
   logoPicker3.checked = false;
