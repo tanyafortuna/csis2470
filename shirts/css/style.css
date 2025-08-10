@@ -363,6 +363,7 @@ button#build-shirt { margin-bottom: 200px; }
 #cart-address input {
   display: block;
   margin: 3px 0;
+  width: 180px; 
 }
 
 #cart-address input.error { border-color: red; }
