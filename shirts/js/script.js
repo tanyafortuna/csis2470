@@ -8,6 +8,7 @@ class Shirt {
   #t2;
   #t3;
   #cartQty;
+  #colorName;
 
   constructor() {
     this.size = "medium";
@@ -18,6 +19,7 @@ class Shirt {
     this.text2 = "";
     this.text3 = "";
     this.cartQty = 0;
+    this.colorName = "";
   }
 
   // Setters
@@ -29,6 +31,7 @@ class Shirt {
   set text2(x) { this.#t2 = x; }
   set text3(x) { this.#t3 = x; }
   set cartQty(x) { this.resetCartQty(); }
+  set colorName(x) { this.#colorName = x; }
 
   // Getters
   get size() { return this.#s; }
@@ -39,6 +42,7 @@ class Shirt {
   get text2() { return this.#t2; }
   get text3() { return this.#t3; }
   get cartQty() { return this.#cartQty; }
+  get colorName() { return this.#colorName; }
 
   incCartQty() { this.#cartQty++; }
   resetCartQty() { this.#cartQty = 0; }
@@ -55,6 +59,7 @@ let inputsSection = document.getElementById("inputs");
 let previewSection = document.getElementById("preview");
 let addressSection = document.getElementById("cart-address");
 let contentsSection = document.getElementById("cart-contents");
+let thanksSection = document.getElementById("thanks");
 
 let previewSectionH2 = document.querySelector("#preview h2");
 let shirtDiv = document.getElementById("shirt");
@@ -353,6 +358,14 @@ function startOver() {
   changeShirtLogoOpacity(false);
 
   removeShirtText();
+
+  if (cartContents.length === 0) {
+    cartTargetDiv.removeEventListener('dragover', function(e) { e.preventDefault(); });
+    cartTargetDiv.addEventListener('drop', drop);
+    cartTargetDiv.style.cursor = "pointer";
+    cartTargetDiv.setAttribute("onclick", "showCart();");
+    shirtDiv.setAttribute("draggable", "true");
+  }
 }
 
 function buildShirt() {
@@ -360,6 +373,7 @@ function buildShirt() {
   introSection.style.display = "none";
   addressSection.style.display = "none";
   contentsSection.style.display = "none";
+  thanksSection.style.display = "none";
   previewSection.style.display = "block";
   inputsSection.style.display = "grid";
   previewSectionH2.style.opacity = "1";
@@ -409,7 +423,7 @@ function createCartCards() {
     if (item.logo != "")
       html += `<p class="logo"><span class="fancy">Logo</span>: ${item.logo}</p>`;
     else if (item.text1 != "" || item.text2 != "" || item.text3 != "")
-      html += `<p class="text"><span class="fancy">Text</span>: ${item.text1} / ${item.text2} / ${item.text3}</p>`;
+      html += `<p class="text"><span class="fancy">Text</span>: ${createString(item)}</p>`;
 
     html += '</div>';
     html += '<div class="right-align">';
@@ -438,12 +452,77 @@ function getColor(hex) {
     if (x.readyState === 4 && x.status === 200) {
       for (let span of document.querySelectorAll(`.C${hex}`))
         span.innerHTML = JSON.parse(x.responseText).paletteTitle;
+      for (let item of cartContents) {
+        if (item.color == `#${hex}`)
+          item.colorName = JSON.parse(x.responseText).paletteTitle;
+      }
     }
   });
 }
 
 function placeOrder() {
+  addressSection.style.display = "none";
+  contentsSection.style.display = "none";
+  thanksSection.style.display = "block";
+  createOrderSummary();
+  createShippingSummary();
+  console.log("Objects in order:");
+  console.log(cartContents);
+  cartContents = [];
+  cartCountP.textContent = "";
+}
 
+function createString(obj) {
+  let str = "";
+
+  if (obj.text1 != "") {
+    str += `${obj.text1}`;
+    if (obj.text2 != "" || obj.text3 != "") str += " ";
+  }
+  if (obj.text2 != "") {
+    str += `${obj.text2}`;
+    if (obj.text3 != "") str += " ";
+  }
+  if (obj.text3 != "")
+    str += `${obj.text3}`;
+
+  return str;
+}
+
+function createOrderSummary() {
+  let html = "";
+
+  for (let i = 0; i < cartContents.length; i++) {
+    html += `<p><span class="fancy">Design ${i + 1}</span>: `;
+    html += `A ${cartContents[i].colorName} shirt`;
+    html += `, size ${cartContents[i].size}`;
+
+    if (cartContents[i].pocket == "l")
+      html += ", having a left-side pocket";
+    else if (cartContents[i].pocket == "r")
+      html += ", having a right-side pocket";
+
+    if (cartContents[i].logo != "")
+      html += `, with the ${cartContents[i].logo} logo`;
+    else if (cartContents[i].text1 != "" || cartContents[i].text2 != "" || cartContents[i].text3 != "") {
+      html += `, with text saying "${createString(cartContents[i])}"`;
+    }
+
+    html += `. (qty ${cartContents[i].cartQty})</p>`;
+  }
+
+  document.querySelector("div.order-info").innerHTML = html;
+}
+
+function createShippingSummary() {
+  let html = `<p>${fnameField.value} ${lnameField.value}</p>`;
+  html += `<p>${addrField.value}`;
+  if (aptField.value != "") html += `, apt ${aptField.value}`;
+  html += "</p>";
+  html += `<p>${cityField.value}, ${stateField.value} ${zipField.value}</p>`;
+  html += `<p>${phoneField.value}</p>`;
+
+  document.querySelector("div.shipping-info").innerHTML = html;
 }
 
 

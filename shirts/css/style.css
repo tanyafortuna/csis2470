@@ -357,9 +357,9 @@ button#build-shirt { margin-bottom: 200px; }
 /* Cart contents CSS */
 #cart-contents { 
   display: none; 
-  overflow-y: scroll;
   height: 700px;
   width: 700px;
+  overflow-y: scroll;
 }
 
 #cart-contents #summary, 
@@ -382,4 +382,22 @@ button#build-shirt { margin-bottom: 200px; }
 }
 
 #cart-contents p { margin-bottom: 2px; }
-#cart-contents span.fancy { text-decoration: underline; }
+span.fancy { text-decoration: underline; }
+
+
+/* Thanks CSS */
+#thanks {
+  display: none;
+  grid-column: span 2;
+  height: 700px;
+  width: 700px;
+  overflow-y: scroll;
+}
+
+#thanks p.appreciate, #thanks h2 { padding: 15px; }
+
+#thanks h2 { text-align: center; }
+
+.order-info p { padding: 15px; }
+
+.shipping-info { padding: 15px; }
