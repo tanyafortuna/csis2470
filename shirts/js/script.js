@@ -411,10 +411,18 @@ function startOver() {
   removeShirtText();
 
   if (cartContents.length === 0) {
-    cartTargetDiv.addEventListener('drop', addToCart);
-    cartTargetDiv.style.cursor = "pointer";
-    cartTargetDiv.setAttribute("onclick", "showCart();");
     shirtDiv.setAttribute("draggable", "true");
+    shirtDiv.addEventListener("dragstart", setDragImage);
+
+    cartTargetDiv.setAttribute("onclick", "showCart();");
+    cartTargetDiv.style.cursor = "pointer";
+
+    cartTargetDiv.addEventListener('dragover', function(e) { e.preventDefault(); });
+    cartTargetDiv.addEventListener('dragenter',
+      function(e) { cartTargetDiv.classList.add('hover'); });
+    cartTargetDiv.addEventListener('dragleave',
+      function(e) { cartTargetDiv.classList.remove('hover'); });
+    cartTargetDiv.addEventListener('drop', addToCart);
   }
 }
 
@@ -427,20 +435,6 @@ function buildShirt() {
   previewSection.style.display = "block";
   inputsSection.style.display = "grid";
   previewSectionH2.style.opacity = "1";
-
-  // allow shirt to be draggable and cart to be the target
-  shirtDiv.setAttribute("draggable", "true");
-  shirtDiv.addEventListener("dragstart", setDragImage);
-
-  cartTargetDiv.addEventListener('dragover', function(e) { e.preventDefault(); });
-  cartTargetDiv.addEventListener('dragenter',
-    function(e) { cartTargetDiv.classList.toggle('hover'); });
-  cartTargetDiv.addEventListener('dragleave',
-    function(e) { cartTargetDiv.classList.toggle('hover'); });
-  cartTargetDiv.addEventListener('drop', addToCart);
-
-  cartTargetDiv.style.cursor = "pointer";
-  cartTargetDiv.setAttribute("onclick", "showCart();");
 }
 
 function showCart() {
@@ -461,6 +455,7 @@ function createCartSummary() {
   if (totalItems == 0) {
     html = "<p>You've got to create some shirts before you check out!</p>";
     document.querySelector(".summary").innerHTML = html;
+    document.querySelector("#summary .right-align").innerHTML = "";
   }
   else {
     let plural = (totalItems > 1 ? "s" : "");
