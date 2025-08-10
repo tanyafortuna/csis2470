@@ -63,6 +63,7 @@ let thanksSection = document.getElementById("thanks");
 
 let previewSectionH2 = document.querySelector("#preview h2");
 let shirtDiv = document.getElementById("shirt");
+let shirtShapeDiv = document.getElementById("shirt-shape");
 let cartTargetDiv = document.getElementById("cart-target");
 let cartCountP = document.getElementById("cart-count");
 
@@ -416,11 +417,18 @@ function buildShirt() {
   previewSectionH2.style.opacity = "1";
 
   // allow shirt to be draggable and cart to be the target
+  shirtDiv.setAttribute("draggable", "true");
+  shirtDiv.addEventListener("dragstart", setDragImage);
+
   cartTargetDiv.addEventListener('dragover', function(e) { e.preventDefault(); });
+  cartTargetDiv.addEventListener('dragenter',
+    function(e) { cartTargetDiv.classList.toggle('hover'); });
+  cartTargetDiv.addEventListener('dragleave',
+    function(e) { cartTargetDiv.classList.toggle('hover'); });
   cartTargetDiv.addEventListener('drop', addToCart);
+
   cartTargetDiv.style.cursor = "pointer";
   cartTargetDiv.setAttribute("onclick", "showCart();");
-  shirtDiv.setAttribute("draggable", "true");
 }
 
 function showCart() {
@@ -580,6 +588,8 @@ function createShippingSummary() {
 
 // Dragging functions
 function addToCart() {
+  cartTargetDiv.classList.remove('hover');
+
   // check if item is dupe of one in the cart already
   let dupe = false;
   for (let item of cartContents) {
@@ -611,6 +621,35 @@ function addToCart() {
   let sum = 0;
   for (let item of cartContents) sum += item.cartQty;
   cartCountP.textContent = sum;
+}
+
+function setDragImage(e) {
+  let wrapper = document.createElement("div");
+  wrapper.style.width = "75px";
+  wrapper.style.height = "75px";
+  wrapper.style.position = "absolute";
+  wrapper.style.top = "-9999px";
+
+  let dragGhost = shirtShapeDiv.cloneNode(true);
+
+  // Scale it down to 100x100 visually
+  const scaleX = 75 / shirtShapeDiv.offsetWidth;
+  const scaleY = 75 / shirtShapeDiv.offsetHeight;
+  const scale = Math.min(scaleX, scaleY);
+
+  dragGhost.style.transform = `scale(${scale})`;
+  dragGhost.style.transformOrigin = "top left";
+
+  // Remove margins to avoid offset shifts
+  dragGhost.style.margin = "0";
+
+  // Put it offscreen so it doesn't show up in the layout
+  wrapper.appendChild(dragGhost);
+  document.body.appendChild(wrapper);
+  void wrapper.offsetWidth;
+
+  // Set the smaller ghost as the drag image
+  e.dataTransfer.setDragImage(wrapper, 37, 37);
 }
 
 

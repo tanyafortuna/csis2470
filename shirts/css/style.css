@@ -33,22 +33,25 @@ header {
   width: 100vw;
   height: 90px;
   padding: 0 20px;
+  margin-top: 5px;
 }
 
 #cart-target { 
   position: relative;
   display: flex;
   justify-content: center;
+  border-radius: 50%;
 }
+#cart-target.hover { background-color: #66a6ff; }
 
 header img {
   position: absolute;
-  top: 5px;
+  top: -4px;
 }
 
 header p {
   height: 90px;
-  padding-top: 44px;
+  padding-top: 35px;
   font-weight: 900;
   font-size: 32px;
 }
@@ -120,8 +123,6 @@ input[type="color"] {
 
 fieldset.logo-or-text {
   display: grid;
-  /* grid-template-columns: 420px 180px; */
-  /* column-gap: 30px; */
   grid-template-rows: auto auto;
   width: 670px;
 }
